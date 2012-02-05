@@ -5,8 +5,7 @@
 #include <QMessageBox>
 
 Almoco::Almoco(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Almoco)
+    QDialog(parent), ui(new Ui::Almoco), iTamanhoCampo( 10 )
 {
     ui->setupUi(this);
 
@@ -14,7 +13,7 @@ Almoco::Almoco(QWidget *parent) :
     ui->dateEdit_data->setDate( QDate::currentDate() );
 
     ui->lineEdit_valor->setFocus();
-    ui->lineEdit_valor->setText( "0.00" );
+    ui->lineEdit_valor->setText( "" );
     ui->dateEdit_data->setFocus();
     ui->lineEdit_valor->setFocus();
 
@@ -53,14 +52,11 @@ void Almoco::CriarBanco()
         sCaminhoArquivoCSV.append( sBarra + "almoco.csv" );
     }
     const QString sSeparador(";");
-    const QString sCabecalho ( "\"Código\"" + sSeparador + "\"Valor\"" + sSeparador + "\"Data\"\n" );
+//    const QString sCabecalho ( "Código" + sSeparador + "Valor" + sSeparador + "Data\n" );
 
     if( arquivoCSV.exists() )
     {
-        QTextStream almoco( &arquivoCSV );
-        QString sLinha = almoco.readLine();
-
-        if( sLinha != sCabecalho )
+        if( QMessageBox::question( this, "Banco", "Criar novo banco?", "Sim", "Não", "", 1 ) == 0 )
         {
             if( !arquivoCSV.remove() )
                 QMessageBox::warning( this, "Erro", "Erro ao remover csv:\n"
@@ -75,10 +71,14 @@ void Almoco::CriarBanco()
     if ( arquivoCSV.open( QFile::WriteOnly | QFile::Append ) )
     {
         QTextStream almoco( &arquivoCSV );
-        almoco.setFieldWidth( 10 );
-        //almoco.setFieldAlignment( QTextStream::AlignLeft );
 
-        almoco << "\"Código\"" + sSeparador << "\"Valor\"" + sSeparador << "\"Data\"\n";
+        almoco.setFieldWidth( iTamanhoCampo );
+        almoco.setFieldAlignment( QTextStream::AlignLeft );
+        almoco << "Código" + sSeparador;
+        almoco.setFieldAlignment( QTextStream::AlignRight );
+        almoco << "Valor" + sSeparador;
+        almoco.setFieldAlignment( QTextStream::AlignRight );
+        almoco << "Data\n";
     }
     else
     {
@@ -90,7 +90,8 @@ void Almoco::CarregaAlmoco()
 {
     QString sLinha;
     QStringList sDados;
-    QFile arquivoCSV( sCaminhoArquivoCSV );
+    QFile arquivoCSV( sCaminhoArquivoCSV );    
+    double dTotal = 0.00;
 
     arquivoCSV.open( QFile::ReadOnly );
 
@@ -101,17 +102,29 @@ void Almoco::CarregaAlmoco()
     while( !almoco.atEnd() )
     {
         sLinha = almoco.readLine();
-        sDados = sLinha.replace("\"", "").split( ";" );
+        sDados = sLinha.split( ";" );
 
-        ui->listWidget_lista->addItem( sDados.at( 0 ) + " " + sDados.at( 1 ) + " " + sDados.at( 2 )  );
+        if( sDados.count() == 3 )
+        {
+            if( sDados.at( 0 ).left( 1 ) != "x" )
+            {
+                dTotal += sDados.at( 1 ).toDouble();
+
+                ui->listWidget_lista->addItem( sDados.at( 0 ) + " " + sDados.at( 1 ) + " " + sDados.at( 2 )  );
+            }
+        }
     }
+
+    QString sTotal;
+
+    sTotal = NumeroParaMoeda( dTotal );
+
+    ui->label_total->setText( sTotal );
 }
 
-void Almoco::on_pushButton_clicked()
+void Almoco::on_pushButton_adicinar_clicked()
 {
     QString sValor = ui->lineEdit_valor->text();
-
-    sValor = ui->lineEdit_valor->text();
 
     if( sValor.isNull() )
     {
@@ -128,6 +141,9 @@ void Almoco::on_pushButton_clicked()
 
         return ;
     }
+
+    sValor = NumeroParaMoeda( sValor.toDouble() );
+
     QString sCodigo;
     const QString sSeparador(";");
 
@@ -137,15 +153,17 @@ void Almoco::on_pushButton_clicked()
 
     QFile arquivoCSV( sCaminhoArquivoCSV );
 
-   bool ok = arquivoCSV.open( QFile::WriteOnly | QFile::Append );
+    arquivoCSV.open( QFile::WriteOnly | QFile::Append );
 
     QTextStream almoco( &arquivoCSV );
 
-
-    almoco.setFieldWidth( 10 );
-    //almoco.setFieldAlignment( QTextStream::AlignLeft );
-    almoco << "\"" + sCodigo + "\"" + sSeparador << "\"" + sValor + "\""
-              + sSeparador << ui->dateEdit_data->date().toString("dd-MM-yyyy") + "\"\n";
+    almoco.setFieldWidth( iTamanhoCampo );
+    almoco.setFieldAlignment( QTextStream::AlignLeft );
+    almoco << "" + sCodigo + "" + sSeparador ;
+    almoco.setFieldAlignment( QTextStream::AlignRight );
+    almoco << "" + sValor + "" + sSeparador;
+    almoco.setFieldAlignment( QTextStream::AlignRight );
+    almoco << ui->dateEdit_data->date().toString("dd-MM-yyyy") + "\n";
     arquivoCSV.close();
 
     LimparCampos();
@@ -156,6 +174,33 @@ void Almoco::LimparCampos()
 {
     ui->lineEdit_valor->selectAll();
     ui->lineEdit_valor->setFocus();
+}
+
+QString Almoco::MoedaParaNumero(double dValor)
+{
+    QString numero( QString::number( dValor, 'g', 8 ) );
+    //Ex: 3.000,33 vai ficar 3000.33
+    numero = numero.replace(".", "").replace(",", ".");
+
+    return QString( numero );
+}
+
+QString Almoco::NumeroParaMoeda(double dValor)
+{
+    QString sValor( QString::number( dValor, 'g', 8 ) );
+
+    if( sValor.contains( "." ) && !sValor.contains( "," ) )
+    {
+        sValor = sValor.replace( ".", "," );
+    }
+
+    QString moeda;
+    //Formata o numero com duas casas apos a virgula
+    moeda = QString("%L1").arg( sValor.replace(".", "").replace(",", ".").toDouble(), 0, 'f', 2);
+
+    moeda = FormataCodigo( moeda, 5 );
+
+    return QString( moeda );
 }
 
 QString Almoco::FormataCodigo(QString codigo, int qtdZeros)
@@ -171,4 +216,47 @@ QString Almoco::FormataCodigo(QString codigo, int qtdZeros)
     novoCodigo+= codigo;
 
     return novoCodigo;
+}
+
+void Almoco::on_pushButton_remover_clicked()
+{
+    if( ui->listWidget_lista->currentItem() == 0 )
+        return ;
+
+    QString sCodigoDeletar = ui->listWidget_lista->currentItem()->text().mid( 0, 6);
+    QString sCodigoProcurar;
+
+    QFile arquivoCSV( sCaminhoArquivoCSV );
+
+    arquivoCSV.open( QFile::ReadWrite );
+
+    QTextStream almoco( &arquivoCSV );
+
+    //Como a primeira linha é o cabeçalho, pula ela
+    sCodigoProcurar = almoco.readLine();
+
+    while( !almoco.atEnd() )
+    {
+        int iPosicao;
+
+        iPosicao = almoco.pos();
+
+        sCodigoProcurar =  almoco.read( 6 );//Como tem que tirar os
+
+        if( sCodigoProcurar == sCodigoDeletar )
+        {
+
+            QString sLetra;
+
+            sLetra = "x";
+
+            almoco.seek( iPosicao );
+            almoco << sLetra;
+            break;
+        }
+
+        sCodigoProcurar = almoco.readLine();
+    }
+    arquivoCSV.close();
+    CarregaAlmoco();
 }
