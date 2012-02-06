@@ -2,7 +2,12 @@
 #define ALMOCO_H
 
 #include <QDialog>
-#include <QFile>
+//Banco
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlDriver>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlRecord>
 
 namespace Ui {
     class Almoco;
@@ -17,22 +22,28 @@ public:
     ~Almoco();
 
 private slots:
-    void on_pushButton_adicinar_clicked();
+
+
+    void on_pushButton_adicionar_clicked();
+
+    void on_lineEdit_valor_editingFinished();
 
     void on_pushButton_remover_clicked();
 
+    void on_checkBox_pordata_clicked();
+
 private:
     Ui::Almoco *ui;
-    QString sCaminhoArquivoCSV;
-    const size_t  iTamanhoCampo;
+    QSqlDatabase db;
 
     QString FormataCodigo(const QString codigo,const int qtdZeros = 6);
-    QString NumeroParaMoeda(double dValor);
-    QString MoedaParaNumero(double dValor);
+    QString NumeroParaMoeda(QString sValor);
+    QString MoedaParaNumero(QString Valor);
+
     void CriarBanco();
     void CarregaAlmoco();
     void LimparCampos();
-
+    void ErroSQL( QSqlQuery sql, QString sRotina );
 };
 
 #endif // ALMOCO_H
