@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QDesktopWidget>
 
 Almoco::Almoco(QWidget *parent) :
     QDialog(parent), ui(new Ui::Almoco)
@@ -23,6 +24,7 @@ Almoco::Almoco(QWidget *parent) :
 
     ui->checkBox_pordata->setChecked( false );
     on_checkBox_pordata_clicked();
+    labelEspera = 0;
 
     CriarBanco();
     CarregaAlmoco();
@@ -35,51 +37,49 @@ Almoco::~Almoco()
 
 void Almoco::CriarBanco()
 {
+    const QString sBarra = QDir::separator();
+    QString sCaminhoBanco;
+    const QString sPastaBanco("Almoco");
+    QDir diretorio;
 
-        const QString sBarra = QDir::separator();
-        QString sCaminhoBanco;
-        const QString sPastaBanco("Almoco");
-        QDir diretorio;
+    //Quando testado no computador esse caminho não existe
+    if( diretorio.exists( sBarra + "mnt" + sBarra + "sdcard" ) )
+    {
+        sCaminhoBanco = sBarra + "mnt" + sBarra + "sdcard";
+    }
+    else
+    {
+        sCaminhoBanco = sBarra + "sdcard" + sBarra;
+    }
 
-        //Quando testado no computador esse caminho não existe
-        if( diretorio.exists( sBarra + "mnt" + sBarra + "sdcard" ) )
-        {
-            sCaminhoBanco = sBarra + "mnt" + sBarra + "sdcard";
-        }
-        else
-        {
-           sCaminhoBanco = sBarra + "sdcard" + sBarra;
-        }
+    diretorio.setCurrent( sCaminhoBanco );
 
+    if( !diretorio.exists( sPastaBanco ) )
+    {
+        diretorio.mkdir( sPastaBanco );
+    }
 
-        diretorio.setCurrent( sCaminhoBanco );
+    diretorio.setCurrent( sCaminhoBanco + sBarra + sPastaBanco );
 
-        if( !diretorio.exists( sPastaBanco ) )
-        {
-            diretorio.mkdir( sPastaBanco );
-        }
+    sCaminhoBanco.append( sBarra + sPastaBanco + sBarra + "almoco.db" );
 
-        diretorio.cd( sPastaBanco );
+    db = QSqlDatabase::addDatabase( "QSQLITE", "almoco" );
 
-        sCaminhoBanco.append( sBarra + "almoco.db" );
+    db.setDatabaseName( sCaminhoBanco );
 
-        db = QSqlDatabase::addDatabase( "QSQLITE", "almoco" );
+    if( !db.open() )
+    {
+        QMessageBox::warning( this, "Erro", "Erro ao conectar no banco:\n" +
+                              db.lastError().text(), "ok");
+        return ;
+    }
 
-        db.setDatabaseName( sCaminhoBanco );
+    QSqlQuery sql( db );
 
-        if( !db.open() )
-        {
-            QMessageBox::warning( this, "Erro", "Erro ao conectar no banco:\n" +
-                                  db.lastError().text(), "ok");
-            return ;
-        }
-
-        QSqlQuery sql( db );
-
-        if( !sql.exec( "create table if not exists almoco( codigo integer primary key autoincrement, valor double not null default 0.00, data date not null default '00-00-0000') " ) )
-        {
-            ErroSQL( sql, "CriarBanco" );
-        }
+    if( !sql.exec( "create table if not exists almoco( codigo integer primary key autoincrement, valor double not null default 0.00, data date not null default '00-00-0000') " ) )
+    {
+        ErroSQL( sql, "CriarBanco" );
+    }
 }
 
 void Almoco::ErroSQL(QSqlQuery sql, QString sRotina)
@@ -87,17 +87,39 @@ void Almoco::ErroSQL(QSqlQuery sql, QString sRotina)
     QMessageBox::warning( this, "Erro", "Erro rotina " + sRotina + ":\n" + sql.lastError().text(), "ok");
 }
 
-void Almoco::CarregaAlmoco()
+void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 {
     QSqlQuery sql( db );
     QString consulta;
 
     consulta = "select * from almoco";
 
+    if( bCarregarUltimoAlmoco )
+    {
+        consulta.append( "where codigo > "
+                         + ui->listWidget_lista->item( ui->listWidget_lista->count() - 1 )->text().left( 6 ) );
+    }
+    else
+    {
+        ui->listWidget_lista->clear();
+        ui->listWidget_lista->addItem( "Código  Data             Valor" );
+    }
+
     if( ui->checkBox_pordata->isChecked() )
     {
-        consulta.append( " where data between " + ui->dateEdit_de->date().toString( "dd-MM-yyyy" )
-                         + " and " + ui->dateEdit_ate->date().toString( "dd-MM-yyyy" ) );
+        QString sCondicao;
+
+        if( bCarregarUltimoAlmoco )
+        {
+            sCondicao = " and ";
+        }
+        else
+        {
+            sCondicao = " where ";
+        }
+
+        consulta.append( sCondicao +  " data between '" + ui->dateEdit_de->date().toString( "dd-MM-yyyy" )
+                         + "' and '" + ui->dateEdit_ate->date().toString( "dd-MM-yyyy" ) + "' ");
     }
 
     if( !sql.exec( consulta ) )
@@ -106,10 +128,6 @@ void Almoco::CarregaAlmoco()
 
         return ;
     }
-
-    ui->listWidget_lista->clear();
-
-    ui->listWidget_lista->addItem( "Código  Data             Valor" );
 
     while( sql.next() )
     {
@@ -178,6 +196,31 @@ QString Almoco::FormataCodigo(QString codigo, int qtdZeros)
     return novoCodigo;
 }
 
+void Almoco::Espera(bool bMostrar)
+{
+    if( !labelEspera == 0 )
+    {
+        delete labelEspera;
+        labelEspera = 0;
+    }
+
+    if( bMostrar )
+    {
+        this->setEnabled( false );
+
+        labelEspera = new QLabel( "Processando...", 0 );
+
+        //Centraliza o label
+        QRect rect = QApplication::desktop()->availableGeometry( labelEspera );
+
+        labelEspera->move( rect.center() - labelEspera->rect().center()  );
+    }
+    else
+    {
+        this->setEnabled( true );
+    }
+}
+
 void Almoco::on_pushButton_adicionar_clicked()
 {
     QSqlQuery sql( db );
@@ -186,10 +229,18 @@ void Almoco::on_pushButton_adicionar_clicked()
 
     sValor = ui->lineEdit_valor->text();
 
+    if( sValor.isEmpty() )
+    {
+        ui->lineEdit_valor->setFocus();
+        return ;
+    }
+
     if( sValor.toDouble() == 0 )
     {
         sValor = MoedaParaNumero( sValor );
     }
+
+    Espera( true );
 
     consulta = "insert into almoco( valor, data) values(" + sValor + ", '"
             + ui->dateEdit_data->date().toString("dd-MM-yyyy") + "')";
@@ -197,9 +248,18 @@ void Almoco::on_pushButton_adicionar_clicked()
     if( !sql.exec( consulta ) )
     {
         ErroSQL( sql, "on_pushButton_adicinar_clicked");
+
+        Espera( false );
+
+        return ;
     }
 
     CarregaAlmoco();
+
+    ui->lineEdit_valor->selectAll();
+    ui->lineEdit_valor->setFocus();
+
+    Espera( false );
 }
 
 void Almoco::on_lineEdit_valor_editingFinished()
@@ -223,18 +283,52 @@ void Almoco::on_pushButton_remover_clicked()
     else if( ui->listWidget_lista->currentRow() == 0 )
         return ;
 
+    Espera( true );
+
     QString sCodigo = ui->listWidget_lista->currentItem()->text().left( 6 );
 
     QSqlQuery sql( db );
+    QString consulta;
 
-    if( !sql.exec( "delete from almoco where codigo = " + sCodigo ) )
+    consulta = "delete from almoco where codigo = " + sCodigo;
+
+    if( !sql.exec( consulta ) )
     {
         ErroSQL( sql, "on_pushButton_remover_clicked");
 
         return ;
     }
 
-    CarregaAlmoco();
+    //ui->listWidget_lista->removeItemWidget( ui->listWidget_lista->currentItem() );
+    ui->listWidget_lista->takeItem( ui->listWidget_lista->currentRow() );
+
+    consulta = "select sum(valor) as valor from almoco";
+
+    if( ui->checkBox_pordata->isChecked() )
+    {
+            consulta.append( " where data between '" + ui->dateEdit_de->date().toString( "dd-MM-yyyy" )
+                             + "' and '" + ui->dateEdit_ate->date().toString( "dd-MM-yyyy" ) + "' " );
+    }
+
+    if( !sql.exec( consulta ) )
+    {
+        ErroSQL( sql, "CarregaAlmoco");
+
+        Espera( false );
+
+        return ;
+    }
+
+    sql.next();
+
+    ui->label_total->setText( NumeroParaMoeda( sql.record().value("valor").toString() ) );
+
+    if( ui->listWidget_lista->count() > 0 )
+        ui->listWidget_lista->setCurrentRow( ui->listWidget_lista->count() -1 );
+
+    Espera( true );
+
+    //CarregaAlmoco();
 }
 
 void Almoco::on_checkBox_pordata_clicked()
@@ -251,5 +345,14 @@ void Almoco::on_checkBox_pordata_clicked()
     }
 
     ui->dateEdit_de->setEnabled( bHabilitar );
-    ui->dateEdit_ate->setEnabled( bHabilitar );
+    ui->dateEdit_ate->setEnabled( bHabilitar );    
+}
+
+void Almoco::on_pushButton_mostrar_clicked()
+{
+    Espera( true );
+
+    CarregaAlmoco();
+
+    Espera( false );
 }

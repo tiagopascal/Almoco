@@ -61,3 +61,7 @@ OTHER_FILES += \
     android/src/org/kde/necessitas/origo/QtActivity.java \
     android/AndroidManifest.xml
 
+RESOURCES += \
+    imagens.qrc
+
+

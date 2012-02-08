@@ -12,16 +12,15 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>9</pointsize>
-    <weight>50</weight>
-    <bold>false</bold>
+    <family>Ubuntu</family>
    </font>
   </property>
   <property name="windowTitle">
    <string>Almoco</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255));</string>
+   <string notr="true">color: rgb(170, 85, 0);
+background-color: rgb(170, 170, 127);</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
@@ -33,9 +32,8 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -53,9 +51,8 @@
       <widget class="QLineEdit" name="lineEdit_valor">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="layoutDirection">
@@ -110,9 +107,8 @@
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -130,9 +126,8 @@
       <widget class="QDateEdit" name="dateEdit_data">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -187,9 +182,8 @@
       <widget class="QPushButton" name="pushButton_adicionar">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -204,9 +198,8 @@
       <widget class="QPushButton" name="pushButton_remover">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -245,9 +238,8 @@
       <widget class="QCheckBox" name="checkBox_pordata">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="text">
@@ -278,9 +270,8 @@
         <widget class="QLabel" name="label_5">
          <property name="font">
           <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <family>ori1Uni</family>
+           <pointsize>8</pointsize>
           </font>
          </property>
          <property name="text">
@@ -292,9 +283,8 @@
         <widget class="QDateEdit" name="dateEdit_de">
          <property name="font">
           <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <family>ori1Uni</family>
+           <pointsize>8</pointsize>
           </font>
          </property>
          <property name="displayFormat">
@@ -302,20 +292,20 @@
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -327,9 +317,8 @@
         <widget class="QLabel" name="label_4">
          <property name="font">
           <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <family>ori1Uni</family>
+           <pointsize>8</pointsize>
           </font>
          </property>
          <property name="text">
@@ -341,9 +330,8 @@
         <widget class="QDateEdit" name="dateEdit_ate">
          <property name="font">
           <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <family>ori1Uni</family>
+           <pointsize>8</pointsize>
           </font>
          </property>
          <property name="displayFormat">
@@ -352,6 +340,19 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_mostrar">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&amp;Mostrar</string>
+       </property>
+      </widget>
      </item>
      <item>
       <spacer name="horizontalSpacer_6">
@@ -370,13 +371,12 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="2">
+     <item row="0" column="0" colspan="3">
       <widget class="QListWidget" name="listWidget_lista">
        <property name="font">
         <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -388,10 +388,12 @@
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
        </property>
        <property name="text">
         <string>Total:</string>
@@ -402,15 +404,30 @@
       <widget class="QLabel" name="label_total">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>ori1Uni</family>
+         <pointsize>8</pointsize>
         </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
        </property>
        <property name="text">
         <string>00.00</string>
        </property>
       </widget>
+     </item>
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -422,8 +439,10 @@
   <tabstop>dateEdit_data</tabstop>
   <tabstop>pushButton_adicionar</tabstop>
   <tabstop>pushButton_remover</tabstop>
+  <tabstop>checkBox_pordata</tabstop>
   <tabstop>dateEdit_de</tabstop>
   <tabstop>dateEdit_ate</tabstop>
+  <tabstop>pushButton_mostrar</tabstop>
   <tabstop>listWidget_lista</tabstop>
  </tabstops>
  <resources/>
