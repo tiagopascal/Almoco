@@ -1,5 +1,7 @@
 #include <QtGui/QApplication>
 #include <QTextCodec>
+#include <QIcon>
+
 #include "almoco.h"
 
 int main(int argc, char *argv[])
@@ -9,6 +11,8 @@ int main(int argc, char *argv[])
     qApp->addLibraryPath("/data/data/org.kde.necessitas.ministro/files/qt/plugins");
 
     QTextCodec::setCodecForCStrings( QTextCodec::codecForName("UTF-8") );
+
+     QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
 
     Almoco w;
 #if defined(Q_WS_S60)

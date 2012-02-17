@@ -6,13 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>355</width>
     <height>480</height>
    </rect>
   </property>
   <property name="font">
    <font>
     <family>Ubuntu</family>
+    <pointsize>8</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -33,7 +34,7 @@ background-color: rgb(170, 170, 127);</string>
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -52,7 +53,7 @@ background-color: rgb(170, 170, 127);</string>
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="layoutDirection">
@@ -65,19 +66,6 @@ background-color: rgb(170, 170, 127);</string>
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_8">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <spacer name="horizontalSpacer_2">
@@ -93,7 +81,7 @@ background-color: rgb(170, 170, 127);</string>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>99</width>
+         <width>370</width>
          <height>20</height>
         </size>
        </property>
@@ -102,13 +90,13 @@ background-color: rgb(170, 170, 127);</string>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -122,84 +110,12 @@ background-color: rgb(170, 170, 127);</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QDateEdit" name="dateEdit_data">
-       <property name="font">
-        <font>
-         <family>ori1Uni</family>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="displayFormat">
-        <string>dd/MM/yyyy</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_9">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>79</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QPushButton" name="pushButton_adicionar">
-       <property name="font">
-        <font>
-         <family>ori1Uni</family>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>&amp;Adicionar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
+     <item row="0" column="3">
       <widget class="QPushButton" name="pushButton_remover">
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -210,51 +126,140 @@ background-color: rgb(170, 170, 127);</string>
        </property>
       </widget>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
+     <item row="0" column="4">
+      <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>111</width>
-         <height>21</height>
+         <width>60</width>
+         <height>20</height>
         </size>
        </property>
       </spacer>
      </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButton_adicionar">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>&amp;Adicionar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDateEdit" name="dateEdit_data">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="displayFormat">
+        <string>dd/MM/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
       <widget class="QCheckBox" name="checkBox_pordata">
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Exibir por data:</string>
+        <string>Filtro data:</string>
        </property>
       </widget>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
+     <item row="0" column="1">
+      <widget class="QDateEdit" name="dateEdit_de">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="displayFormat">
+        <string>dd/MM/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>a</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QDateEdit" name="dateEdit_ate">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="displayFormat">
+        <string>dd/MM/yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>100</width>
          <height>20</height>
         </size>
        </property>
@@ -263,90 +268,16 @@ background-color: rgb(170, 170, 127);</string>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="font">
-          <font>
-           <family>ori1Uni</family>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>De:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDateEdit" name="dateEdit_de">
-         <property name="font">
-          <font>
-           <family>ori1Uni</family>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="displayFormat">
-          <string>dd/MM/yyyy</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="font">
-          <font>
-           <family>ori1Uni</family>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Até</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDateEdit" name="dateEdit_ate">
-         <property name="font">
-          <font>
-           <family>ori1Uni</family>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="displayFormat">
-          <string>dd/MM/yyyy</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QHBoxLayout" name="horizontalLayout_6"/>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_mostrar">
        <property name="font">
         <font>
          <family>ori1Uni</family>
-         <pointsize>8</pointsize>
+         <pointsize>7</pointsize>
         </font>
        </property>
        <property name="text">
@@ -371,25 +302,14 @@ background-color: rgb(170, 170, 127);</string>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="3">
-      <widget class="QListWidget" name="listWidget_lista">
-       <property name="font">
-        <font>
-         <family>ori1Uni</family>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
          <family>ori1Uni</family>
          <pointsize>8</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="frameShape">
@@ -406,6 +326,8 @@ background-color: rgb(170, 170, 127);</string>
         <font>
          <family>ori1Uni</family>
          <pointsize>8</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="frameShape">
@@ -429,19 +351,29 @@ background-color: rgb(170, 170, 127);</string>
        </property>
       </spacer>
      </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QListWidget" name="listWidget_lista">
+       <property name="font">
+        <font>
+         <family>ori1Uni</family>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
+  <zorder>verticalSpacer</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>lineEdit_valor</tabstop>
   <tabstop>dateEdit_data</tabstop>
-  <tabstop>pushButton_adicionar</tabstop>
-  <tabstop>pushButton_remover</tabstop>
   <tabstop>checkBox_pordata</tabstop>
-  <tabstop>dateEdit_de</tabstop>
-  <tabstop>dateEdit_ate</tabstop>
   <tabstop>pushButton_mostrar</tabstop>
   <tabstop>listWidget_lista</tabstop>
  </tabstops>
