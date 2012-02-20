@@ -2,19 +2,22 @@
 #include <QTextCodec>
 #include <QIcon>
 
-#include "almoco.h"
+#include "header/almoco.h"
+#include "header/ConexaoBancoAtendimento.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    //Para o sqlite funcionar.
     qApp->addLibraryPath("/data/data/org.kde.necessitas.ministro/files/qt/plugins");
 
     QTextCodec::setCodecForCStrings( QTextCodec::codecForName("UTF-8") );
 
-     QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
+    QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
 
-    Almoco w;
+    Almoco w;    
+
 #if defined(Q_WS_S60)
     w.showMaximized();
 #else

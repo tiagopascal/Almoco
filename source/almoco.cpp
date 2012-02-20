@@ -1,5 +1,7 @@
-#include "almoco.h"
+#include "header/almoco.h"
 #include "ui_almoco.h"
+#include "header/ConexaoBancoAtendimento.h"
+
 #include <QDir>
 #include <QTextStream>
 #include <QMessageBox>
@@ -9,6 +11,12 @@ Almoco::Almoco(QWidget *parent) :
     QDialog(parent), ui(new Ui::Almoco)
 {
     ui->setupUi(this);
+
+    ConexaoBanco::ConectaBanco( "QSQLITE" );
+
+    db = ConexaoBanco::Banco();
+
+    ui->tabWidget->setCurrentIndex( 0 );
 
     ui->dateEdit_data->setDate( QDate::currentDate() );
 
@@ -26,65 +34,12 @@ Almoco::Almoco(QWidget *parent) :
     on_checkBox_pordata_clicked();
     labelEspera = 0;
 
-    CriarBanco();
     CarregaAlmoco();
 }
 
 Almoco::~Almoco()
 {
     delete ui;
-}
-
-void Almoco::CriarBanco()
-{
-    const QString sBarra = QDir::separator();
-    QString sCaminhoBanco;
-    const QString sPastaBanco("Almoco");
-    QDir diretorio;
-
-    //Quando testado no computador esse caminho não existe
-    if( diretorio.exists( sBarra + "mnt" + sBarra + "sdcard" ) )
-    {
-        sCaminhoBanco = sBarra + "mnt" + sBarra + "sdcard";
-    }
-    else
-    {
-        sCaminhoBanco = sBarra + "sdcard" + sBarra;
-    }
-
-    diretorio.setCurrent( sCaminhoBanco );
-
-    if( !diretorio.exists( sPastaBanco ) )
-    {
-        diretorio.mkdir( sPastaBanco );
-    }
-
-    diretorio.setCurrent( sCaminhoBanco + sBarra + sPastaBanco );
-
-    sCaminhoBanco.append( sBarra + sPastaBanco + sBarra + "almoco.db" );
-
-    db = QSqlDatabase::addDatabase( "QSQLITE", "almoco" );
-
-    db.setDatabaseName( sCaminhoBanco );
-
-    if( !db.open() )
-    {
-        QMessageBox::warning( this, "Erro", "Erro ao conectar no banco:\n" +
-                              db.lastError().text(), "ok");
-        return ;
-    }
-
-    QSqlQuery sql( db );
-
-    if( !sql.exec( "create table if not exists almoco( codigo integer primary key autoincrement, valor double not null default 0.00, data date not null default '00-00-0000') " ) )
-    {
-        ErroSQL( sql, "CriarBanco" );
-    }
-}
-
-void Almoco::ErroSQL(QSqlQuery sql, QString sRotina)
-{
-    QMessageBox::warning( this, "Erro", "Erro rotina " + sRotina + ":\n" + sql.lastError().text(), "ok");
 }
 
 void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
@@ -124,7 +79,7 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 
     if( !sql.exec( consulta ) )
     {
-        ErroSQL( sql, "CarregaAlmoco");
+        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
 
         return ;
     }
@@ -138,7 +93,7 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 
     if( !sql.exec( "select sum(valor) as valor from almoco" ) )
     {
-        ErroSQL( sql, "CarregaAlmoco");
+        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
 
         return ;
     }
@@ -146,6 +101,39 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
     sql.next();
 
     ui->label_total->setText( NumeroParaMoeda( sql.record().value("valor").toString() ) );
+}
+
+void Almoco::CarregaRestaurante(bool bCarregarUltimoRestaurante)
+{
+    if( bCarregarUltimoRestaurante )
+    {
+        ui->listWidget_restaurantesCadastrados->addItem(
+                    ui->lineEdit_restaurante->text() );
+
+        return ;
+    }
+
+    QSqlQuery sql( db );
+    QString consulta;
+
+    consulta = "select nome, valor from restaurante ";
+
+    if( !sql.exec( consulta ) )
+    {
+        Funcoes::ErroSQL( sql, "CarregaRestaurante", this );
+
+        return ;
+    }
+
+    int iPosicao = 0;
+
+    while( sql.next() )
+    {
+        ui->listWidget_restaurantesCadastrados->addItem( sql.record().value("nome").toString() );
+        ui->listWidget_restaurantesCadastrados->item( iPosicao )->setData(
+                    0, NumeroParaMoeda( sql.record().value("codigo").toString() ) );
+        iPosicao++;
+    }
 }
 
 void Almoco::LimparCampos()
@@ -247,14 +235,14 @@ void Almoco::on_pushButton_adicionar_clicked()
 
     if( !sql.exec( consulta ) )
     {
-        ErroSQL( sql, "on_pushButton_adicinar_clicked");
+        Funcoes::ErroSQL( sql, "on_pushButton_adicinar_clicked", this);
 
         Espera( false );
 
         return ;
-    }
+    }    
 
-    CarregaAlmoco();
+    QMessageBox::information( this, "Almoco", "Alcoço adicionado com sucesso!", "Ok");
 
     ui->lineEdit_valor->selectAll();
     ui->lineEdit_valor->setFocus();
@@ -294,7 +282,7 @@ void Almoco::on_pushButton_remover_clicked()
 
     if( !sql.exec( consulta ) )
     {
-        ErroSQL( sql, "on_pushButton_remover_clicked");
+        Funcoes::ErroSQL( sql, "on_pushButton_remover_clicked", this);
 
         return ;
     }
@@ -312,7 +300,7 @@ void Almoco::on_pushButton_remover_clicked()
 
     if( !sql.exec( consulta ) )
     {
-        ErroSQL( sql, "CarregaAlmoco");
+        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
 
         Espera( false );
 
@@ -355,4 +343,110 @@ void Almoco::on_pushButton_mostrar_clicked()
     CarregaAlmoco();
 
     Espera( false );
+}
+
+void Almoco::on_tabWidget_currentChanged(int index)
+{
+    if( index == 1 )
+    {
+        CarregaAlmoco();
+    }
+    else if( index == 2 )
+    {
+        CarregaRestaurante();
+    }
+}
+
+void Almoco::on_lineEdit_valorPagoEmpresa_editingFinished()
+{
+    QString sValor = ui->lineEdit_valorPagoEmpresa->text();
+
+    if( sValor.contains( "." ) && !sValor.contains( "," ) )
+    {
+        sValor = sValor.replace( ".", "," );
+    }
+
+    sValor = NumeroParaMoeda( sValor );
+
+    ui->lineEdit_valorPagoEmpresa->setText( sValor );
+}
+
+void Almoco::on_pushButton_adicionarRestaurante_clicked()
+{
+    QString sRestaurante;
+
+    sRestaurante = ui->lineEdit_restaurante->text();
+
+    if( sRestaurante.isEmpty() )
+    {
+        ui->lineEdit_restaurante->setFocus();
+        return ;
+    }
+
+    QString sValor = ui->lineEdit_valorPagoEmpresa->text();
+
+    if( sValor.isEmpty() )
+    {
+        ui->lineEdit_restaurante->setFocus();
+        return ;
+    }
+
+    if( sValor.toDouble() == 0 )
+    {
+        sValor = MoedaParaNumero( sValor );
+    }
+
+    QSqlQuery sql( db );
+    QString consulta;
+
+    Espera( true );
+
+    consulta = "insert into restaurante( nome, valor ) values('" + sRestaurante + "', " + sValor + ")";
+
+    if( !sql.exec( consulta ) )
+    {
+        Funcoes::ErroSQL( sql, "on_pushButton_adicionarRestaurante_clicked", this );
+
+        Espera( false );
+
+        return ;
+    }
+
+    CarregaRestaurante( true );
+
+    ui->lineEdit_restaurante->selectAll();
+    ui->lineEdit_restaurante->setFocus();
+
+    Espera( false );
+}
+
+void Almoco::on_pushButton_removerRestaurante_clicked()
+{
+    if( ui->listWidget_restaurantesCadastrados->currentItem() == 0)
+        return ;
+
+    QString sRestaurante = ui->listWidget_restaurantesCadastrados->currentItem()->text();
+
+    int iBotao = QMessageBox::question( this, "Almoco", "Tem certeza que quer remover o restaurante <br><b>"
+                                        + sRestaurante + "</b></br>", "Sim", "Não");
+
+    if( iBotao == 1 )
+        return ;
+
+    QSqlQuery sql( db );
+
+    if( !sql.exec( "delete from restaurante where nome = '" + sRestaurante + "'"  ) )
+    {
+        Funcoes::ErroSQL( sql, "on_pushButton_removerRestaurante_clicked", this );
+
+        return ;
+    }
+
+    ui->listWidget_restaurantesCadastrados->takeItem(
+                ui->listWidget_restaurantesCadastrados->currentRow() );
+}
+
+void Almoco::on_listWidget_restaurantesCadastrados_clicked(const QModelIndex &index)
+{
+    ui->label_ValorrestauranteSelecionado->setText(  index.data( 0 ).toString()  );
 }

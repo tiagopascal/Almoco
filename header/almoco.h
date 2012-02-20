@@ -10,6 +10,8 @@
 #include <QtSql/QSqlRecord>
 #include <QLabel>
 
+#include <header/funcoes.h>
+
 namespace Ui {
     class Almoco;
 }
@@ -35,6 +37,16 @@ private slots:
 
     void on_pushButton_mostrar_clicked();
 
+    void on_tabWidget_currentChanged(int index);
+
+    void on_lineEdit_valorPagoEmpresa_editingFinished();
+
+    void on_pushButton_adicionarRestaurante_clicked();
+
+    void on_pushButton_removerRestaurante_clicked();
+
+    void on_listWidget_restaurantesCadastrados_clicked(const QModelIndex &index);
+
 private:
     Ui::Almoco *ui;
     QLabel *labelEspera;
@@ -44,10 +56,9 @@ private:
     QString NumeroParaMoeda(QString sValor);
     QString MoedaParaNumero(QString Valor);
 
-    void CriarBanco();
     void CarregaAlmoco( bool bCarregarUltimoAlmoco = false );
-    void LimparCampos();
-    void ErroSQL( QSqlQuery sql, QString sRotina );
+    void CarregaRestaurante( bool bCarregarUltimoRestaurante = false );
+    void LimparCampos();    
     void Espera( bool bMostrar = false );
 };
 
