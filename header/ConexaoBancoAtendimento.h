@@ -37,7 +37,6 @@ namespace ConexaoBanco
 
     QSqlDatabase Banco();
 
-    QString ValorCampo( QSqlDatabase dbBanco , QString tabela, QString condicao, QString campoRetorno, QString alias = "");
-    QString ValorCampo( QString tabela, QString condicao, QString campoRetorno, QString alias = "");    
+    QString ValorCampo( QSqlDatabase dbBanco , QString tabela, QString condicao, QString campoRetorno, QString alias = "");    
 }
 #endif // CONEXAOBANCOATENDIMENTO_H

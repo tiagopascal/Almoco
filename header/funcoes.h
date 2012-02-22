@@ -52,5 +52,7 @@ namespace Funcoes
     void IconeAplicativo();
     void copyFolder(QString sourceFolder, QString destFolder);
     void LimparPonteiros();
+    QString MoedaParaNumero(QString sValor);
+    QString NumeroParaMoeda(QString sValor);
 }
 #endif // FUNCOES_H

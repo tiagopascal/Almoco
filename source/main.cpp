@@ -3,6 +3,7 @@
 #include <QIcon>
 
 #include "header/almoco.h"
+#include "header/menu.h"
 #include "header/ConexaoBancoAtendimento.h"
 
 int main(int argc, char *argv[])
@@ -16,7 +17,16 @@ int main(int argc, char *argv[])
 
     QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
 
-    Almoco w;    
+//    QFont fonte;
+
+//    fonte.setPointSize( 7 );
+
+//    QApplication::setFont( fonte );
+
+    //Almoco w;
+    Menu w;
+
+    w.setWindowModality( Qt::ApplicationModal );
 
 #if defined(Q_WS_S60)
     w.showMaximized();

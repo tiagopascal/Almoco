@@ -78,7 +78,7 @@ QString ConexaoBanco::MontaQueryInsert(const QString &nomeTabela, const QMap<QSt
 
 void ConexaoBanco::CriaUsuarioPadrao()
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     bool ok;
 
@@ -103,11 +103,6 @@ void ConexaoBanco::CriaUsuarioPadrao()
 QSqlDatabase ConexaoBanco::Banco()
 {
     return db;
-}
-
-QString ConexaoBanco::ValorCampo(QString tabela, QString condicao, QString campoRetorno, QString alias)
-{
-    return ValorCampo( Banco(),  tabela, condicao, campoRetorno, alias );
 }
 
 QString ConexaoBanco::ValorCampo(QSqlDatabase dbBanco, QString tabela, QString condicao, QString campoRetorno, QString alias)
@@ -274,7 +269,7 @@ QString ConexaoBanco::CriaPastaBanco()
 
 bool ConexaoBanco::AlterarTipoCampoTabela(QString tabela, QString campoNovoTipo, bool transacao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     bool ok;
     QString sNovaTabelaTemp, consulta;
     size_t numero = 0;
@@ -362,7 +357,7 @@ bool ConexaoBanco::AlterarTipoCampoTabela(QString tabela, QString campoNovoTipo,
 
 bool ConexaoBanco::VerificaSeCampoExiste(QString tabela, QString campoVerificar, bool transacao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
 
     bool ok;
@@ -385,7 +380,7 @@ bool ConexaoBanco::VerificaSeCampoExiste(QString tabela, QString campoVerificar,
 
 bool ConexaoBanco::AdicionarCampoTabela(QString tabela, QStringList novosCamposEtipo, char separador, bool transacao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     QString camposTabelaOriginal;
     QString criacao;
@@ -540,7 +535,7 @@ bool ConexaoBanco::AdicionarCampoTabela(QString tabela, QStringList novosCamposE
 
 bool ConexaoBanco::RemoverCampoTabela(QString tabela, QString campoRemover, char separador, bool transacao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     QString tabelaTmp;
     QString camposTabelaOriginal;
@@ -703,7 +698,7 @@ bool ConexaoBanco::RemoverCampoTabela(QString tabela, QString campoRemover, char
 
 void ConexaoBanco::RemoverTabelasTemp(QString tabela, int qtd, bool transacao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     bool ok;
 
@@ -783,7 +778,7 @@ bool ConexaoBanco::CriarTabelas(QSqlDatabase dbBanco, bool transacao)
     if( !ok )
         Funcoes::ErroSQL( sql, "ConexaoBanco::CriarTabelas()" );
 
-    consulta = "create table if not exists restaurante( codigo integer primary key "  + sAutoIncrement + ", nome vachar(100) not null default '', varlor double not null default 0.00 ) ";
+    consulta = "create table if not exists restaurante( codigo integer primary key "  + sAutoIncrement + ", nome vachar(100) not null default '', valor double not null default 0.00 ) ";
     ok = sql.exec( consulta );
 
     if( !ok )
@@ -802,11 +797,11 @@ bool ConexaoBanco::CriarTabelas(QSqlDatabase dbBanco, bool transacao)
 
 bool ConexaoBanco::AtualizaTabelaVersao(QString versao, QDate data)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     bool ok;
 
-    consulta = "SELECT * FROM versao_atendimento WHERE versao = '" + versao + "'";
+    consulta = "SELECT * FROM versao WHERE versao = '" + versao + "'";
     ok = sql.exec( consulta );
 
     if( !ok )
@@ -814,7 +809,7 @@ bool ConexaoBanco::AtualizaTabelaVersao(QString versao, QDate data)
 
     if( !sql.next() )//Se não encontrou
     {
-        consulta = "INSERT INTO versao_atendimento (versao, dataversao, dataatualizacao) VALUES ('" + versao + "', '" + data.toString("yyyy-MM-dd") + "', '" + QDate::currentDate().toString("yyyy-MM-dd") + "')";
+        consulta = "INSERT INTO versao (versao, dataversao, dataatualizacao) VALUES ('" + versao + "', '" + data.toString("yyyy-MM-dd") + "', '" + QDate::currentDate().toString("yyyy-MM-dd") + "')";
         ok = sql.exec(consulta);
 
         if( !ok )
@@ -833,7 +828,7 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
     //Verifica se tem algum usuário cadastrado    
     bool atualizaou = true;
 
-    consulta = "SELECT versao FROM versao_atendimento WHERE versao = (SELECT MAX(versao) FROM versao_atendimento)";
+    consulta = "SELECT versao FROM versao WHERE versao = ( SELECT MAX(versao) FROM versao )";
     sql.exec(consulta);
 
     //BackUpBancoSQLite( false );
@@ -843,13 +838,9 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
     else
         versao = "0.0.1";
 
-    if( versao == "0.0.1" )
+    if( versao == "0.0.3" )
     {
-        CriarTabelas( db );
-//        if( sql.exec( "alter table almoco add restaurante integer not null default 0" ) )
-//        {
-//            Funcoes::ErroSQL( sql, "ConexaoBanco::AtualizaEstruturaDoBanco()");
-//        }
+        sql.exec( "alter table almoco add restaurante integer not null default 0" );
     }
 
      return atualizaou;
@@ -961,7 +952,7 @@ void ConexaoBanco::ImportaCSV()
     QTextStream arquivoCSV( &fArquivo );
     QString sLinha, sSeparador(";");
     QStringList slDados;
-    QSqlQuery sql;
+    QSqlQuery sql( db );
     QString consulta;
     bool ok;
     QMap< QString, QString > query;

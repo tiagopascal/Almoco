@@ -24,6 +24,8 @@
 #include <QTime>
 #include <QTextStream>
 
+#include "header/ConexaoBancoAtendimento.h"
+
 QFtp *ftp;
 QFile *arquivo;
 
@@ -268,6 +270,18 @@ void Funcoes::IconeAplicativo()
 
 void Funcoes::ErroSQL(QSqlQuery sql, QString rotina, QWidget *tela)
 {
+//    QMessageBox mensagem( tela );
+//    QFont fonte;
+
+//    fonte.setPointSize( 7 );
+//    mensagem.setFont( fonte );
+
+//    //mensagem.setParent( tela );
+//    mensagem.setText( rotina );
+//    mensagem.setInformativeText( "<br><br>Descrição:\n" + sql.lastError().text() + "</br></br>"
+//                       "<br><b><br>SQL  " + sql.lastQuery() + "</br><b></br>");
+
+//    mensagem.exec();
     QMessageBox::warning( tela, "Erro SQL" ,rotina +
                          + "<br><br>Descrição:\n" + sql.lastError().text() + "</br></br>"
                           "<br><b><br>SQL  " + sql.lastQuery() + "</br><b></br>"
@@ -580,7 +594,7 @@ QString Funcoes::MontaQueryUpdate(QString nomeTabela, QVector< QVector<QString> 
 void Funcoes::CarregaCombo(QComboBox &combo, QString tabela, QString campo, QString valorPrimeiroIndice
                   , QString campoItemData, bool limparComboAntes, QString condicao)
 {
-    QSqlQuery sql;
+    QSqlQuery sql( ConexaoBanco::Banco() );
     QString consulta;
     bool ok;
 
@@ -711,4 +725,31 @@ QString Funcoes::CriptografarSenha(const QString senha)
     QString retorno = senhaCriptografada;
 
     return retorno;
+}
+
+QString Funcoes::MoedaParaNumero(QString sValor)
+{
+    QString numero( sValor );
+    //Ex: 3.000,33 vai ficar 3000.33
+    numero = numero.replace(".", "").replace(",", ".");
+
+    return QString( numero );
+}
+
+QString Funcoes::NumeroParaMoeda(QString sValor)
+{
+    //QString sValor( QString::number( dValor, 'g', 8 ) );
+
+    if( sValor.contains( "." ) && !sValor.contains( "," ) )
+    {
+        sValor = sValor.replace( ".", "," );
+    }
+
+    QString moeda;
+    //Formata o numero com duas casas apos a virgula
+    moeda = QString("%L1").arg( sValor.replace(".", "").replace(",", ".").toDouble(), 0, 'f', 2);
+
+    //moeda = FormataCodigo( moeda, 5 );
+
+    return QString( moeda );
 }

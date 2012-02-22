@@ -1,6 +1,5 @@
 #include "header/almoco.h"
 #include "ui_almoco.h"
-#include "header/ConexaoBancoAtendimento.h"
 
 #include <QDir>
 #include <QTextStream>
@@ -12,28 +11,47 @@ Almoco::Almoco(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ConexaoBanco::ConectaBanco( "QSQLITE" );
+    operacao = CARREGANDO;
 
     db = ConexaoBanco::Banco();
 
-    ui->tabWidget->setCurrentIndex( 0 );
+    QSqlQuery sql( db );
 
-    ui->dateEdit_data->setDate( QDate::currentDate() );
+    if( !sql.exec( "select nome, codigo from restaurante " ) )
+    {
+        Funcoes::ErroSQL( sql, "Almoco::Almoco" );
 
-    ui->lineEdit_valor->setFocus();
-    ui->lineEdit_valor->setText( "" );
-    ui->dateEdit_data->setFocus();
-    ui->lineEdit_valor->setFocus();
+        return ;
+    }
 
-    QDate data = QDate::currentDate();
+    ui->comboBox_restaurantesLancamento->clear();    
 
-    ui->dateEdit_de->setDate( QDate( data.year(),  data.month(), 1 ) );
-    ui->dateEdit_ate->setDate( QDate( data.year(), data.month(), data.daysInMonth() ) );
+    int iPosicao = 0;
 
-    ui->checkBox_pordata->setChecked( false );
-    on_checkBox_pordata_clicked();
-    labelEspera = 0;
+    while( sql.next() )
+    {
+        ui->comboBox_restaurantesLancamento->addItem( sql.record().value("nome").toString() );
+        ui->comboBox_restaurantesLancamento->setItemData( iPosicao, sql.record().value("codigo") );
+        iPosicao++;
+    }
 
+    ui->comboBox_restaurantesLancamento->addItem( "Todos" );
+    ui->comboBox_restaurantesLancamento->setItemData( iPosicao, QVariant( 0 ) );
+
+    QDate dataAtual ( QDate::currentDate() );
+
+    int iMes;
+
+    if( dataAtual.month() == 1 )
+        iMes = 12;
+    else
+        iMes = dataAtual.month() - 1;
+
+    ui->dateEdit_filtro->setDate( QDate( dataAtual.year(), iMes, 20 ) );
+    ui->dateEdit_data->setDate( dataAtual );
+    ui->dateEdit_filtroAte->setDate( dataAtual );
+
+    operacao = NENHUMA;
     CarregaAlmoco();
 }
 
@@ -42,105 +60,132 @@ Almoco::~Almoco()
     delete ui;
 }
 
+void Almoco::keyPressEvent(QKeyEvent *event)
+{        
+//    if( event->key() == Qt::Key_MediaPrevious )
+//    {
+//        this->close();
+//    }
+}
+
 void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 {
+    if( operacao == CARREGANDO )
+        return ;
+
     QSqlQuery sql( db );
     QString consulta;
+    QString sWhere;
+    bool bTodos = false;
+    QString sCodigoEmpresa = ui->comboBox_restaurantesLancamento->itemData( ui->comboBox_restaurantesLancamento->currentIndex() ).toString() ;
+    this->setEnabled( false );
 
-    consulta = "select * from almoco";
+    if( ui->comboBox_restaurantesLancamento->currentText() == "Todos" )
+        bTodos = true;
 
-    if( bCarregarUltimoAlmoco )
+    consulta = "select almoco.*, restaurante.nome, restaurante.valor as valorRestaurante from almoco left join restaurante on almoco.restaurante = restaurante.codigo ";
+
+    if( bTodos )
     {
-        consulta.append( "where codigo > "
-                         + ui->listWidget_lista->item( ui->listWidget_lista->count() - 1 )->text().left( 6 ) );
+        sWhere = "";
+        //sWhere = " where almoco.data between '" + ui->dateEdit_filtro->date().toString("dd-MM-yyyy") + "' and '" + ui->dateEdit_filtroAte->date().toString("dd-MM-yyyy") + "' " ;
+    }
+    else
+    {
+        if( sCodigoEmpresa.isEmpty() )
+            sCodigoEmpresa = "0";
+
+        sWhere = " where almoco.restaurante = " + sCodigoEmpresa ;//+ " and almoco.data between '" + ui->dateEdit_filtro->date().toString("dd-MM-yyyy") + "' and '" + ui->dateEdit_filtroAte->date().toString("dd-MM-yyyy") + "' ";
+    }
+
+    consulta += sWhere ;
+
+    if( bCarregarUltimoAlmoco and !bTodos )
+    {
+        int iQtd = ui->listWidget_lista->count();
+
+        if( iQtd > 0 )
+        {
+            consulta.append( " and almoco.codigo > " + ui->listWidget_lista->item( iQtd - 1 )->whatsThis() );
+        }
     }
     else
     {
         ui->listWidget_lista->clear();
-        ui->listWidget_lista->addItem( "Código  Data             Valor" );
-    }
-
-    if( ui->checkBox_pordata->isChecked() )
-    {
-        QString sCondicao;
-
-        if( bCarregarUltimoAlmoco )
-        {
-            sCondicao = " and ";
-        }
-        else
-        {
-            sCondicao = " where ";
-        }
-
-        consulta.append( sCondicao +  " data between '" + ui->dateEdit_de->date().toString( "dd-MM-yyyy" )
-                         + "' and '" + ui->dateEdit_ate->date().toString( "dd-MM-yyyy" ) + "' ");
     }
 
     if( !sql.exec( consulta ) )
     {
         Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
 
+        QMessageBox::information( this, "", sql.lastError().text(), "ok");
+
+        this->setEnabled( true );
+
         return ;
     }
 
     while( sql.next() )
     {
-        ui->listWidget_lista->addItem( FormataCodigo( sql.record().value("codigo").toString() )
-                                       + "  " + sql.record().value("data").toString()
-                                       + "  " + NumeroParaMoeda( sql.record().value("valor").toString() ) );
+        QListWidgetItem *novoItem = new QListWidgetItem( );
+
+        novoItem->setText( "Data:  " + sql.record().value("data").toString()
+                           + "\nValor: " + NumeroParaMoeda( sql.record().value("valor").toString() )
+                           + "\nRestaurante: " + sql.record().value("nome").toString() );
+        novoItem->setWhatsThis( sql.record().value("codigo").toString() );
+        ui->listWidget_lista->addItem( novoItem );
     }
 
-    if( !sql.exec( "select sum(valor) as valor from almoco" ) )
+    consulta = "select sum(valor) as valor from almoco " + sWhere;
+
+    if( !sql.exec( consulta ) )
     {
-        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
+        Funcoes::ErroSQL( sql, "Almoco::CarregaAlmoco", this );
+
+        this->setEnabled( true );
 
         return ;
     }
 
     sql.next();
 
-    ui->label_total->setText( NumeroParaMoeda( sql.record().value("valor").toString() ) );
-}
+    ui->label_almoco->setText( Funcoes::NumeroParaMoeda( sql.record().value("valor").toString() ) );
 
-void Almoco::CarregaRestaurante(bool bCarregarUltimoRestaurante)
-{
-    if( bCarregarUltimoRestaurante )
+    QString sValorEmpresa;
+
+    if( bTodos )
     {
-        ui->listWidget_restaurantesCadastrados->addItem(
-                    ui->lineEdit_restaurante->text() );
-
-        return ;
+        sValorEmpresa = ConexaoBanco::ValorCampo( db, "restaurante",  " 1 = 1 " , "sum(valor) as valor", "valor" );
+    }
+    else
+    {
+        sValorEmpresa = ConexaoBanco::ValorCampo( db, "restaurante",  "codigo = " + sCodigoEmpresa , "valor" );
     }
 
-    QSqlQuery sql( db );
-    QString consulta;
-
-    consulta = "select nome, valor from restaurante ";
+    consulta = "select sum(valor - " + sValorEmpresa + ") as valor from almoco " + sWhere;
 
     if( !sql.exec( consulta ) )
     {
-        Funcoes::ErroSQL( sql, "CarregaRestaurante", this );
+        Funcoes::ErroSQL( sql, "Almoco::CarregaAlmoco", this );
+
+        this->setEnabled( true );
 
         return ;
     }
 
-    int iPosicao = 0;
+    sql.next();
 
-    while( sql.next() )
-    {
-        ui->listWidget_restaurantesCadastrados->addItem( sql.record().value("nome").toString() );
-        ui->listWidget_restaurantesCadastrados->item( iPosicao )->setData(
-                    0, NumeroParaMoeda( sql.record().value("codigo").toString() ) );
-        iPosicao++;
-    }
+    ui->label_voce->setText( Funcoes::NumeroParaMoeda( sql.record().value("valor").toString() ) );
+
+    //double dValorVoce = ui->label_almoco->text().toDouble() - ui->label_empresa->text().toDouble() ;
+
+    //ui->label_voce->setText( Funcoes::NumeroParaMoeda( QString::number( dValorVoce ) ) );
+    ui->label_empresa->setText( QString::number( sValorEmpresa.toDouble() * ui->listWidget_lista->count() ) );
+
+    this->setEnabled( true );
 }
 
-void Almoco::LimparCampos()
-{
-    ui->lineEdit_valor->selectAll();
-    ui->lineEdit_valor->setFocus();
-}
+
 
 QString Almoco::MoedaParaNumero(QString sValor)
 {
@@ -169,46 +214,6 @@ QString Almoco::NumeroParaMoeda(QString sValor)
     return QString( moeda );
 }
 
-QString Almoco::FormataCodigo(QString codigo, int qtdZeros)
-{
-    QString novoCodigo;
-    int qtdCaracterCodigo = qtdZeros - codigo.length();
-
-    for(int i = 0; i < qtdCaracterCodigo; ++i)
-    {
-        novoCodigo+= "0";
-    }
-
-    novoCodigo+= codigo;
-
-    return novoCodigo;
-}
-
-void Almoco::Espera(bool bMostrar)
-{
-    if( !labelEspera == 0 )
-    {
-        delete labelEspera;
-        labelEspera = 0;
-    }
-
-    if( bMostrar )
-    {
-        this->setEnabled( false );
-
-        labelEspera = new QLabel( "Processando...", 0 );
-
-        //Centraliza o label
-        QRect rect = QApplication::desktop()->availableGeometry( labelEspera );
-
-        labelEspera->move( rect.center() - labelEspera->rect().center()  );
-    }
-    else
-    {
-        this->setEnabled( true );
-    }
-}
-
 void Almoco::on_pushButton_adicionar_clicked()
 {
     QSqlQuery sql( db );
@@ -228,26 +233,25 @@ void Almoco::on_pushButton_adicionar_clicked()
         sValor = MoedaParaNumero( sValor );
     }
 
-    Espera( true );
+    this->setEnabled( false  );
 
-    consulta = "insert into almoco( valor, data) values(" + sValor + ", '"
-            + ui->dateEdit_data->date().toString("dd-MM-yyyy") + "')";
+    consulta = "insert into almoco( valor, data, restaurante) values(" + sValor + ", '"
+            + ui->dateEdit_data->date().toString("dd-MM-yyyy") + "', " +
+            ui->comboBox_restaurantesLancamento->itemData(
+            ui->comboBox_restaurantesLancamento->currentIndex() ).toString() + ")";
 
     if( !sql.exec( consulta ) )
     {
         Funcoes::ErroSQL( sql, "on_pushButton_adicinar_clicked", this);
 
-        Espera( false );
+        this->setEnabled( true );
 
         return ;
-    }    
+    }
 
-    QMessageBox::information( this, "Almoco", "Alcoço adicionado com sucesso!", "Ok");
+    CarregaAlmoco();
 
-    ui->lineEdit_valor->selectAll();
-    ui->lineEdit_valor->setFocus();
-
-    Espera( false );
+    this->setEnabled( true );
 }
 
 void Almoco::on_lineEdit_valor_editingFinished()
@@ -268,12 +272,15 @@ void Almoco::on_pushButton_remover_clicked()
 {
     if( ui->listWidget_lista->currentItem() == 0 )
         return ;
-    else if( ui->listWidget_lista->currentRow() == 0 )
+
+    int iBotao = QMessageBox::question( this, "", "Remover almoço selecionado?","Sim", "Não" );
+
+    if( iBotao == 1 )
         return ;
 
-    Espera( true );
+    this->setEnabled( false  );
 
-    QString sCodigo = ui->listWidget_lista->currentItem()->text().left( 6 );
+    QString sCodigo = ui->listWidget_lista->currentItem()->whatsThis();
 
     QSqlQuery sql( db );
     QString consulta;
@@ -284,169 +291,24 @@ void Almoco::on_pushButton_remover_clicked()
     {
         Funcoes::ErroSQL( sql, "on_pushButton_remover_clicked", this);
 
+        this->setEnabled( true );
+
         return ;
     }
 
     //ui->listWidget_lista->removeItemWidget( ui->listWidget_lista->currentItem() );
     ui->listWidget_lista->takeItem( ui->listWidget_lista->currentRow() );
 
-    consulta = "select sum(valor) as valor from almoco";
-
-    if( ui->checkBox_pordata->isChecked() )
-    {
-            consulta.append( " where data between '" + ui->dateEdit_de->date().toString( "dd-MM-yyyy" )
-                             + "' and '" + ui->dateEdit_ate->date().toString( "dd-MM-yyyy" ) + "' " );
-    }
-
-    if( !sql.exec( consulta ) )
-    {
-        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
-
-        Espera( false );
-
-        return ;
-    }
-
-    sql.next();
-
-    ui->label_total->setText( NumeroParaMoeda( sql.record().value("valor").toString() ) );
-
     if( ui->listWidget_lista->count() > 0 )
         ui->listWidget_lista->setCurrentRow( ui->listWidget_lista->count() -1 );
 
-    Espera( true );
-
-    //CarregaAlmoco();
-}
-
-void Almoco::on_checkBox_pordata_clicked()
-{
-    bool bHabilitar;
-
-    if( ui->checkBox_pordata->isChecked() )
-    {
-        bHabilitar = true;
-    }
-    else
-    {
-        bHabilitar = false;
-    }
-
-    ui->dateEdit_de->setEnabled( bHabilitar );
-    ui->dateEdit_ate->setEnabled( bHabilitar );    
-}
-
-void Almoco::on_pushButton_mostrar_clicked()
-{
-    Espera( true );
-
     CarregaAlmoco();
 
-    Espera( false );
+    this->setEnabled( true  );
 }
 
-void Almoco::on_tabWidget_currentChanged(int index)
+
+void Almoco::on_comboBox_restaurantesLancamento_currentIndexChanged(int index)
 {
-    if( index == 1 )
-    {
-        CarregaAlmoco();
-    }
-    else if( index == 2 )
-    {
-        CarregaRestaurante();
-    }
-}
-
-void Almoco::on_lineEdit_valorPagoEmpresa_editingFinished()
-{
-    QString sValor = ui->lineEdit_valorPagoEmpresa->text();
-
-    if( sValor.contains( "." ) && !sValor.contains( "," ) )
-    {
-        sValor = sValor.replace( ".", "," );
-    }
-
-    sValor = NumeroParaMoeda( sValor );
-
-    ui->lineEdit_valorPagoEmpresa->setText( sValor );
-}
-
-void Almoco::on_pushButton_adicionarRestaurante_clicked()
-{
-    QString sRestaurante;
-
-    sRestaurante = ui->lineEdit_restaurante->text();
-
-    if( sRestaurante.isEmpty() )
-    {
-        ui->lineEdit_restaurante->setFocus();
-        return ;
-    }
-
-    QString sValor = ui->lineEdit_valorPagoEmpresa->text();
-
-    if( sValor.isEmpty() )
-    {
-        ui->lineEdit_restaurante->setFocus();
-        return ;
-    }
-
-    if( sValor.toDouble() == 0 )
-    {
-        sValor = MoedaParaNumero( sValor );
-    }
-
-    QSqlQuery sql( db );
-    QString consulta;
-
-    Espera( true );
-
-    consulta = "insert into restaurante( nome, valor ) values('" + sRestaurante + "', " + sValor + ")";
-
-    if( !sql.exec( consulta ) )
-    {
-        Funcoes::ErroSQL( sql, "on_pushButton_adicionarRestaurante_clicked", this );
-
-        Espera( false );
-
-        return ;
-    }
-
-    CarregaRestaurante( true );
-
-    ui->lineEdit_restaurante->selectAll();
-    ui->lineEdit_restaurante->setFocus();
-
-    Espera( false );
-}
-
-void Almoco::on_pushButton_removerRestaurante_clicked()
-{
-    if( ui->listWidget_restaurantesCadastrados->currentItem() == 0)
-        return ;
-
-    QString sRestaurante = ui->listWidget_restaurantesCadastrados->currentItem()->text();
-
-    int iBotao = QMessageBox::question( this, "Almoco", "Tem certeza que quer remover o restaurante <br><b>"
-                                        + sRestaurante + "</b></br>", "Sim", "Não");
-
-    if( iBotao == 1 )
-        return ;
-
-    QSqlQuery sql( db );
-
-    if( !sql.exec( "delete from restaurante where nome = '" + sRestaurante + "'"  ) )
-    {
-        Funcoes::ErroSQL( sql, "on_pushButton_removerRestaurante_clicked", this );
-
-        return ;
-    }
-
-    ui->listWidget_restaurantesCadastrados->takeItem(
-                ui->listWidget_restaurantesCadastrados->currentRow() );
-}
-
-void Almoco::on_listWidget_restaurantesCadastrados_clicked(const QModelIndex &index)
-{
-    ui->label_ValorrestauranteSelecionado->setText(  index.data( 0 ).toString()  );
+    CarregaAlmoco();
 }

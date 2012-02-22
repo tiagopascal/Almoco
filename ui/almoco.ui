@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>362</width>
-    <height>480</height>
+    <width>360</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="font">
@@ -26,755 +26,416 @@ background-color: rgb(170, 170, 127);</string>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
   </property>
-  <layout class="QGridLayout" name="gridLayout_14">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="font">
-      <font>
-       <pointsize>7</pointsize>
-      </font>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="tabShape">
-      <enum>QTabWidget::Rounded</enum>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-     <property name="currentIndex">
-      <number>2</number>
-     </property>
-     <property name="documentMode">
-      <bool>false</bool>
-     </property>
-     <property name="tabsClosable">
-      <bool>false</bool>
-     </property>
-     <widget class="QWidget" name="tab1">
-      <attribute name="title">
-       <string>Lançamento</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_13">
-       <item row="2" column="0" colspan="2">
-        <layout class="QGridLayout" name="gridLayout_6">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_valor">
+          <property name="font">
+           <font>
+            <family>ori1Uni</family>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhPreferNumbers</set>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer_2">
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>370</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>ori1Uni</family>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Valor:</string>
+          </property>
+          <property name="buddy">
+           <cstring>lineEdit_valor</cstring>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="1">
+         <widget class="QDateEdit" name="dateEdit_data">
+          <property name="font">
+           <font>
+            <family>ori1Uni</family>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <family>ori1Uni</family>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Data:</string>
+          </property>
+          <property name="buddy">
+           <cstring>dateEdit_data</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Restaurante:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="5">
+         <widget class="QComboBox" name="comboBox_restaurantesLancamento">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <item>
            <property name="text">
-            <string>Restaurante:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QComboBox" name="comboBox_restaurantesLancamento">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <item>
-            <property name="text">
-             <string>Restaurante não informado</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_valor">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhPreferNumbers</set>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_2">
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>370</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Valor:</string>
-           </property>
-           <property name="buddy">
-            <cstring>lineEdit_valor</cstring>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="1">
-          <widget class="QDateEdit" name="dateEdit_data">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="displayFormat">
-            <string>dd/MM/yyyy</string>
-           </property>
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Data:</string>
-           </property>
-           <property name="buddy">
-            <cstring>dateEdit_data</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_adicionar">
-         <property name="font">
-          <font>
-           <family>ori1Uni</family>
-           <pointsize>7</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>&amp;Adicionar</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="1">
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-      <zorder></zorder>
-      <zorder>pushButton_adicionar</zorder>
-      <zorder>verticalSpacer</zorder>
-      <zorder>horizontalSpacer_4</zorder>
-     </widget>
-     <widget class="QWidget" name="tab2">
-      <attribute name="title">
-       <string>Almoço</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_12">
-       <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="1" column="0" colspan="2">
-          <widget class="QDateEdit" name="dateEdit_de">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="displayFormat">
-            <string>dd/MM/yyyy</string>
-           </property>
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="label_4">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>a</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3">
-          <widget class="QDateEdit" name="dateEdit_ate">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="displayFormat">
-            <string>dd/MM/yyyy</string>
-           </property>
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox_pordata">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Filtro data:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
-          <spacer name="horizontalSpacer_11">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_14">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Restaurante:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QComboBox" name="comboBox_restaurantesFiltro">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <item>
-            <property name="text">
-             <string>Todos</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QPushButton" name="pushButton_mostrar">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Filtrar</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Remover</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0">
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="6">
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="0" colspan="7">
-          <widget class="QListWidget" name="listWidget_lista">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>Total do Almoço:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>Total da empresa:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLabel" name="label_totalEmpresa">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>000.00</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>Você:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5" colspan="2">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLabel" name="label_TotalVoce">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>000.00</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLabel" name="label_total">
-           <property name="font">
-            <font>
-             <family>ori1Uni</family>
-             <pointsize>7</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="text">
-            <string>000.00</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab3">
-      <attribute name="title">
-       <string>Restaurantes</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_10">
-       <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_5">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Restaurante:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="lineEdit_restaurante">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <layout class="QGridLayout" name="gridLayout_8">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Valor pago pela empresa:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_valorPagoEmpresa">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhPreferNumbers</set>
-           </property>
-           <property name="text">
-            <string>000.00</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_12">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <layout class="QGridLayout" name="gridLayout_9">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_adicionarRestaurante">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Adicionar</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_editarRestaurante">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Editar</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QPushButton" name="pushButton_removerRestaurante">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Remover</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_cancelarEdicaoRestaurante">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Cancelar</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0">
-        <layout class="QGridLayout" name="gridLayout_11">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_12">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Restaurantes cadastrados:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="3">
-          <widget class="QListWidget" name="listWidget_restaurantesCadastrados">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_7">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Valor restaurante selecionado:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLabel" name="label_ValorrestauranteSelecionado">
-           <property name="font">
-            <font>
-             <pointsize>7</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>000.00</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
+            <string>Restaurante não informado</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QDateEdit" name="dateEdit_filtro">
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>7</pointsize>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDateEdit" name="dateEdit_filtroAte">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_6">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Até</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButton_adicionar">
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>&amp;Adicionar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton_remover">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Remover</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>137</width>
+            <height>25</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0" colspan="3">
+         <widget class="QListWidget" name="listWidget_lista">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>Almoço:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_almoco">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>000.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>Empresa:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>Você:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_empresa">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>000.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_voce">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>000.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="2">
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item row="0" column="1">
-    <spacer name="horizontalSpacer_13">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>lineEdit_valor</tabstop>
   <tabstop>dateEdit_data</tabstop>
   <tabstop>comboBox_restaurantesLancamento</tabstop>
+  <tabstop>dateEdit_filtro</tabstop>
+  <tabstop>dateEdit_filtroAte</tabstop>
   <tabstop>pushButton_adicionar</tabstop>
-  <tabstop>checkBox_pordata</tabstop>
-  <tabstop>dateEdit_de</tabstop>
-  <tabstop>dateEdit_ate</tabstop>
-  <tabstop>comboBox_restaurantesFiltro</tabstop>
-  <tabstop>pushButton_mostrar</tabstop>
-  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_remover</tabstop>
   <tabstop>listWidget_lista</tabstop>
-  <tabstop>lineEdit_restaurante</tabstop>
-  <tabstop>lineEdit_valorPagoEmpresa</tabstop>
-  <tabstop>pushButton_adicionarRestaurante</tabstop>
-  <tabstop>pushButton_editarRestaurante</tabstop>
-  <tabstop>pushButton_cancelarEdicaoRestaurante</tabstop>
-  <tabstop>pushButton_removerRestaurante</tabstop>
-  <tabstop>listWidget_restaurantesCadastrados</tabstop>
  </tabstops>
  <resources/>
  <connections/>
