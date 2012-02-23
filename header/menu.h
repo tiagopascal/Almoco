@@ -2,7 +2,6 @@
 #define MENU_H
 
 #include <QDialog>
-#include <QModelIndex>
 #include <QCloseEvent>
 
 namespace Ui {

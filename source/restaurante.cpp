@@ -137,9 +137,14 @@ void Restaurante::on_pushButton_adicionar_clicked()
     this->setEnabled( false  );
 
     if( operacao == EDITAR )
+    {
         consulta = "update restaurante set nome = '" + sRestaurante + "', valor = " +  sValor + " where codigo =  " + ui->listWidget_lista->currentItem()->whatsThis();
+        HabilitarCampos( true );
+    }
     else
+    {
         consulta = "insert into restaurante( nome, valor ) values('" + sRestaurante + "', " + sValor + ")";
+    }
 
     if( !sql.exec( consulta ) )
     {
@@ -151,8 +156,7 @@ void Restaurante::on_pushButton_adicionar_clicked()
     }
 
     CarregaRestaurante( false );
-    operacao = NENHUMA;
-    HabilitarCampos( true );
+    operacao = NENHUMA;    
     this->setEnabled( true );
 }
 

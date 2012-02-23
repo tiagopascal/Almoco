@@ -838,9 +838,10 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
     else
         versao = "0.0.1";
 
-    if( versao == "0.0.3" )
+    if( versao == "0.0.4" )
     {
-        sql.exec( "alter table almoco add restaurante integer not null default 0" );
+
+        //AtualizaTabelaVersao( "0.0.4", QDate( 2012, 2, 22 ) );
     }
 
      return atualizaou;

@@ -10,12 +10,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    //QTextCodec::setCodecForCStrings( QTextCodec::codecForName("ISO 8859-1") );
+    QTextCodec::setCodecForCStrings( QTextCodec::codecForName("UTF-8") );
+
     //Para o sqlite funcionar.
     qApp->addLibraryPath("/data/data/org.kde.necessitas.ministro/files/qt/plugins");
 
-    QTextCodec::setCodecForCStrings( QTextCodec::codecForName("UTF-8") );
-
-    QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
+    //QApplication::setWindowIcon( QIcon( QPixmap(":imagens/Comida.png") ) );
 
 //    QFont fonte;
 

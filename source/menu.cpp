@@ -31,7 +31,7 @@ void Menu::keyPressEvent(QKeyEvent *event)
 
 void Menu::on_pushButton_cadRestaurante_clicked()
 {
-    Restaurante restaurante;
+    Restaurante restaurante( this );
 
     this->setEnabled( false );
 
@@ -42,7 +42,7 @@ void Menu::on_pushButton_cadRestaurante_clicked()
 
 void Menu::on_pushButton_cadAlmoco_clicked()
 {
-    Almoco almoco;
+    Almoco almoco( this );
 
     setVisible( false );
 

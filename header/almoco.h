@@ -36,7 +36,11 @@ private slots:
 
     void on_comboBox_restaurantesLancamento_currentIndexChanged(int index);
 
-protected:    
+    void on_pushButton_editar_clicked();
+
+    void on_pushButton_cancelar_clicked();
+
+protected:
     void keyPressEvent(QKeyEvent *event);
 
 
@@ -44,7 +48,7 @@ private:
     Ui::Almoco *ui;    
     QSqlDatabase db;
 
-    enum Operacao{ NENHUMA, CARREGANDO };
+    enum Operacao{ NENHUMA, CARREGANDO, EDITAR };
 
     Operacao operacao;
     QString FormataCodigo(const QString codigo,const int qtdZeros = 6);
@@ -52,6 +56,7 @@ private:
     QString MoedaParaNumero(QString Valor);
 
     void CarregaAlmoco( bool bCarregarUltimoAlmoco = false );
+    void HabilitaBotoes( bool bHabilitar );
     //void Espera( bool bMostrar = false );
 };
 
