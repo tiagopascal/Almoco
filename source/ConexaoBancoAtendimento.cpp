@@ -105,7 +105,7 @@ QSqlDatabase ConexaoBanco::Banco()
     return db;
 }
 
-QString ConexaoBanco::ValorCampo(QSqlDatabase dbBanco, QString tabela, QString condicao, QString campoRetorno, QString alias)
+QString ConexaoBanco::ValorCampo(QSqlDatabase dbBanco, QString tabela, QString condicao, QString campoRetorno, QString alias, bool bLimit1)
 {
     QSqlQuery sql( dbBanco );
     QString consulta;
@@ -120,7 +120,9 @@ QString ConexaoBanco::ValorCampo(QSqlDatabase dbBanco, QString tabela, QString c
     else
         consulta += alias;
 
-    consulta += " DESC LIMIT 1 ";
+    if( bLimit1 )
+        consulta += " DESC LIMIT 1 ";
+
     ok = sql.exec( consulta );
 
     if( ok )

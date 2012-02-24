@@ -165,12 +165,23 @@ void Restaurante::on_pushButton_remover_clicked()
     if( ui->listWidget_lista->currentItem() == 0)
         return ;
 
+    QString sCodigo = sCodigo = ui->listWidget_lista->currentItem()->whatsThis();
+
+    QString sRestaurante = ConexaoBanco::ValorCampo( ConexaoBanco::Banco(),
+                                                "restaurante", "codigo = " + sCodigo , "nome");
+
+    if( !sRestaurante.isEmpty() )
+    {
+        QMessageBox::information( this, "", "Restaurante lançado em um almoço\npor isso não pode ser excluido", "Ok" );
+        return ;
+    }
+
     int iBotao = QMessageBox::question( this, "Almoco", "Deseja remover o restuarante selecionado?", "Sim", "Não");
 
     if( iBotao == 1 )
         return ;
 
-    QString sCodigo = ui->listWidget_lista->currentItem()->whatsThis();
+
 
     QSqlQuery sql( ConexaoBanco::Banco() );
 
@@ -196,7 +207,7 @@ void Restaurante::on_pushButton_editar_clicked()
     int iDoisPontos = sTexto.indexOf( ":" );
     int iEnter = sTexto.indexOf( "\n" );
 
-    ui->lineEdit_restaurante->setText( sTexto.left( iEnter -1 ) );
+    ui->lineEdit_restaurante->setText( sTexto.left( iEnter ) );
 
     ui->lineEdit_valor->setText( sTexto.mid( iDoisPontos + 1 ) );
 

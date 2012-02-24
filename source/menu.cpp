@@ -33,23 +33,23 @@ void Menu::on_pushButton_cadRestaurante_clicked()
 {
     Restaurante restaurante( this );
 
-    this->setEnabled( false );
+    //this->setEnabled( false );
 
     restaurante.exec();
 
-    this->setEnabled( true );
+    //this->setEnabled( true );
 }
 
 void Menu::on_pushButton_cadAlmoco_clicked()
 {
     Almoco almoco( this );
 
-    setVisible( false );
+    //setVisible( false );
 
     //almoco.setWindowModality( Qt::ApplicationModal );
     almoco.exec();
 
-    setVisible( true );
+    //setVisible( true );
 }
 
 void Menu::on_pushButton_Sair_clicked()

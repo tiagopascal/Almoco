@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>360</width>
+    <width>382</width>
     <height>400</height>
    </rect>
   </property>
@@ -305,7 +305,7 @@ background-color: rgb(170, 170, 127);</string>
       </item>
       <item row="4" column="0">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0" colspan="3">
+        <item row="0" column="0" colspan="7">
          <widget class="QListWidget" name="listWidget_lista">
           <property name="font">
            <font>
@@ -345,19 +345,6 @@ background-color: rgb(170, 170, 127);</string>
          </widget>
         </item>
         <item row="1" column="2">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
          <widget class="QLabel" name="label_4">
           <property name="font">
            <font>
@@ -372,7 +359,35 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="1" column="3">
+         <widget class="QLabel" name="label_empresa">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="text">
+           <string>000.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4" colspan="3">
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0">
          <widget class="QLabel" name="label_7">
           <property name="font">
            <font>
@@ -388,21 +403,6 @@ background-color: rgb(170, 170, 127);</string>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLabel" name="label_empresa">
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
-          </property>
-          <property name="text">
-           <string>000.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
          <widget class="QLabel" name="label_voce">
           <property name="font">
            <font>
@@ -416,32 +416,6 @@ background-color: rgb(170, 170, 127);</string>
            <string>000.00</string>
           </property>
          </widget>
-        </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="2">
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </item>
