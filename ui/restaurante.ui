@@ -14,8 +14,8 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: rgb(0, 85, 0);
-background-color: rgb(170, 170, 127);</string>
+   <string notr="true">background-color: rgb(170, 170, 127);
+color: rgb(0, 85, 0);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -154,7 +154,7 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2" colspan="2">
+        <item row="0" column="3" colspan="2">
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -167,7 +167,7 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </spacer>
         </item>
-        <item row="1" column="2">
+        <item row="0" column="2">
          <widget class="QPushButton" name="pushButton_Voltar">
           <property name="font">
            <font>
@@ -195,6 +195,16 @@ background-color: rgb(170, 170, 127);</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_restaurante</tabstop>
+  <tabstop>lineEdit_valor</tabstop>
+  <tabstop>pushButton_adicionar</tabstop>
+  <tabstop>pushButton_remover</tabstop>
+  <tabstop>pushButton_Voltar</tabstop>
+  <tabstop>pushButton_editar</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
+  <tabstop>listWidget_lista</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

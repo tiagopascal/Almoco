@@ -776,6 +776,7 @@ int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString bo
     if( !botao3.isEmpty() )
         box.addButton( botao3, QMessageBox::AcceptRole );
 
+    box.setIconPixmap( QPixmap( ":imagens/Comida.png" ) );
     //box.setDetailedText( "Teste de testo detalhado\nmais teste\noutro\nblablabla" );
     box.setWindowModality( Qt::WindowModal );
     box.setWindowFlags( Qt::ToolTip );

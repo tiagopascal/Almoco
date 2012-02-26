@@ -3,6 +3,7 @@
 #include "header/almoco.h"
 #include "header/restaurante.h"
 #include "header/ConexaoBancoAtendimento.h"
+#include "header/backup.h"
 
 #include <QMessageBox>
 
@@ -62,4 +63,11 @@ void Menu::on_pushButton_Sair_clicked()
 
     if( iBotao == 0 )
        this->close();
+}
+
+void Menu::on_pushButton_backup_clicked()
+{
+    Backup backup( this );
+
+    backup.exec();
 }

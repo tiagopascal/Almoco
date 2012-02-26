@@ -24,6 +24,8 @@ private slots:
 
     void on_pushButton_Sair_clicked();
 
+    void on_pushButton_backup_clicked();
+
 protected:
     void keyPressEvent(QKeyEvent *event);
 

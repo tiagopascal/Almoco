@@ -195,7 +195,6 @@ void ConexaoBanco::FecharBanco()
 
 bool ConexaoBanco::BancoSqLite()
 {
-
     const QString sBarra = QDir::separator();
     QString sCaminhoBanco;
     const QString sPastaBanco("Almoco");
@@ -219,6 +218,32 @@ bool ConexaoBanco::BancoSqLite()
     }
 
     diretorio.setCurrent( sCaminhoBanco + sBarra + sPastaBanco );
+
+    //Verifica se precisa restaurar banco
+    {
+        if( diretorio.exists( "almocoRestaurar.db" ) )
+        {
+            QFile restaurarBanco( sCaminhoBanco + sBarra + sPastaBanco + sBarra + "almocoRestaurar.db" );
+            QFile bancoAtual( sCaminhoBanco + sBarra + sPastaBanco + sBarra + "almoco.db" );
+
+            if( bancoAtual.exists() )
+            {
+                if( !bancoAtual.remove() )
+                {
+                    Funcoes::MensagemAndroid( "Restaurar banco", "Remover arquivo\nDescriçao: " + bancoAtual.errorString() );
+                }
+            }
+
+            if( !restaurarBanco.rename( "almoco.db" ) )
+            {
+                Funcoes::MensagemAndroid( "Renomear banco", "Descriçao: " + restaurarBanco.errorString() );
+            }
+        }
+//        else
+//        {
+//            Funcoes::MensagemAndroid( "Restarurar", "Nada para restaurar" );
+//        }
+    }
 
     sCaminhoBanco.append( sBarra + sPastaBanco + sBarra + "almoco.db" );
 

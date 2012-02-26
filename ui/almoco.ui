@@ -20,8 +20,8 @@
    <string>Almoco</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: rgb(170, 85, 0);
-background-color: rgb(170, 170, 127);</string>
+   <string notr="true">background-color: rgb(170, 170, 127);
+color: rgb(0, 85, 0);</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
@@ -52,30 +52,13 @@ background-color: rgb(170, 170, 127);</string>
           <property name="inputMethodHints">
            <set>Qt::ImhPreferNumbers</set>
           </property>
+          <property name="text">
+           <string/>
+          </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>370</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label">
@@ -133,6 +116,19 @@ background-color: rgb(170, 170, 127);</string>
            <bool>true</bool>
           </property>
          </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -235,19 +231,7 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="pushButton_remover">
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Remover</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
+        <item row="0" column="5">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -272,19 +256,19 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="pushButton_cancelar">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
             <pointsize>7</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Cancelar</string>
+           <string>Remover</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="0" column="4">
          <widget class="QPushButton" name="pushButton_voltar">
           <property name="font">
            <font>
@@ -293,6 +277,18 @@ background-color: rgb(170, 170, 127);</string>
           </property>
           <property name="text">
            <string>Voltar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_cancelar">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Cancelar</string>
           </property>
          </widget>
         </item>
@@ -422,12 +418,15 @@ background-color: rgb(170, 170, 127);</string>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>lineEdit_valor</tabstop>
+  <tabstop>dateEdit_data</tabstop>
   <tabstop>comboBox_restaurantesLancamento</tabstop>
   <tabstop>dateEdit_filtro</tabstop>
   <tabstop>dateEdit_filtroAte</tabstop>
   <tabstop>pushButton_adicionar</tabstop>
   <tabstop>pushButton_editar</tabstop>
+  <tabstop>pushButton_voltar</tabstop>
   <tabstop>pushButton_remover</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
   <tabstop>listWidget_lista</tabstop>
  </tabstops>
  <resources/>

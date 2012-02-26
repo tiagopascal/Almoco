@@ -15,19 +15,22 @@ SOURCES += \
     source/funcoes.cpp \
     source/ConexaoBancoAtendimento.cpp \
     source/restaurante.cpp \
-    source/menu.cpp
+    source/menu.cpp \    
+    source/backup.cpp
 
 HEADERS  += \
     header/almoco.h \
     header/funcoes.h \
     header/ConexaoBancoAtendimento.h \
     header/restaurante.h \
-    header/menu.h
+    header/menu.h \
+    header/backup.h
 
 FORMS    += \
     ui/almoco.ui \
     ui/restaurante.ui \
-    ui/menu.ui
+    ui/menu.ui \
+    ui/backup.ui
 
 CONFIG += mobility
 MOBILITY = 
@@ -76,3 +79,9 @@ OTHER_FILES += \
 
 RESOURCES += \
     imagens.qrc
+
+
+
+
+
+

@@ -10,9 +10,8 @@
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlRecord>
-#include <QVector>
-#include <QCloseEvent>
-#include <QKeyEvent>
+//#include <QCloseEvent>
+//#include <QKeyEvent>
 
 namespace Ui {
     class Almoco;
