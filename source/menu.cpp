@@ -4,6 +4,8 @@
 #include "header/restaurante.h"
 #include "header/ConexaoBancoAtendimento.h"
 
+#include <QMessageBox>
+
 Menu::Menu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Menu)
@@ -56,5 +58,8 @@ void Menu::on_pushButton_Sair_clicked()
 {
     bFechar = true;
 
-    this->close();
+    int iBotao = Funcoes::MensagemAndroid( "Almoço", "<b>Deseja sair?</b>", "Sim", "Não", this );
+
+    if( iBotao == 0 )
+       this->close();
 }

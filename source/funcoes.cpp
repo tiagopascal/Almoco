@@ -282,10 +282,11 @@ void Funcoes::ErroSQL(QSqlQuery sql, QString rotina, QWidget *tela)
 //                       "<br><b><br>SQL  " + sql.lastQuery() + "</br><b></br>");
 
 //    mensagem.exec();
-    QMessageBox::warning( tela, "Erro SQL" ,rotina +
-                         + "<br><br>Descrição:\n" + sql.lastError().text() + "</br></br>"
-                          "<br><b><br>SQL  " + sql.lastQuery() + "</br><b></br>"
-                         , "ok");
+//    QMessageBox::warning( tela, "Erro SQL" ,rotina +
+//                         + "<br><br>Descrição:\n" + sql.lastError().text() + "</br></br>"
+//                          "<br><b><br>SQL  " + sql.lastQuery() + "</br><b></br>"
+//                         , "ok");
+    MensagemAndroid( "Erro SQL:\n" + rotina, "Descrição: " + sql.lastError().text() + "\nQuery: " + sql.lastQuery(), "Ok", ( QDialog *) tela  );
 }
 
 bool Funcoes::AtualizaSistema()
@@ -752,4 +753,42 @@ QString Funcoes::NumeroParaMoeda(QString sValor)
     //moeda = FormataCodigo( moeda, 5 );
 
     return QString( moeda );
+}
+
+
+int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString botao1, QString botao2, QString botao3, QDialog *parent)
+{
+    QMessageBox box;
+
+    box.setParent( parent );
+
+    //Coloca o titulo em italico e negrito
+    if( !texto.contains( "<b>" ) )
+        texto = "<i><b>" + texto + "</b></i>";
+
+    box.setText( texto );
+    box.setInformativeText( informativeTexto );
+    box.addButton( botao1, QMessageBox::AcceptRole );
+
+    if( !botao2.isEmpty() )
+        box.addButton( botao2, QMessageBox::AcceptRole );
+
+    if( !botao3.isEmpty() )
+        box.addButton( botao3, QMessageBox::AcceptRole );
+
+    //box.setDetailedText( "Teste de testo detalhado\nmais teste\noutro\nblablabla" );
+    box.setWindowModality( Qt::WindowModal );
+    box.setWindowFlags( Qt::ToolTip );
+    box.setStyleSheet("QDialog{ border: 1px solid black; border-style: solid; border-radius: 4px; }");
+    return box.exec();
+}
+
+int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString botao1, QString botao2, QDialog *parent)
+{
+    return MensagemAndroid( texto, informativeTexto, botao1, botao2, QString("") , parent );
+}
+
+int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString botao1, QDialog *parent)
+{
+    return MensagemAndroid( texto, informativeTexto, botao1, QString(""), QString("") , parent );
 }

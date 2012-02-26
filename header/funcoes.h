@@ -54,5 +54,9 @@ namespace Funcoes
     void LimparPonteiros();
     QString MoedaParaNumero(QString sValor);
     QString NumeroParaMoeda(QString sValor);
+
+    int MensagemAndroid( QString texto, QString informativeTexto , QString botao1, QString botao2, QString botao3, QDialog *parent = 0 );
+    int MensagemAndroid( QString texto, QString informativeTexto , QString botao1, QString botao2,  QDialog *parent = 0 );
+    int MensagemAndroid( QString texto, QString informativeTexto , QString botao1 = QString("Ok"), QDialog *parent = 0 );
 }
 #endif // FUNCOES_H

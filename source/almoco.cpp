@@ -59,13 +59,13 @@ Almoco::~Almoco()
     delete ui;
 }
 
-void Almoco::keyPressEvent(QKeyEvent *event)
-{        
+//void Almoco::keyPressEvent(QKeyEvent *event)
+//{
 //    if( event->key() == Qt::Key_MediaPrevious )
 //    {
 //        this->close();
 //    }
-}
+//}
 
 void Almoco::HabilitaBotoes(bool bHabilitar)
 {
@@ -130,9 +130,7 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 
     if( !sql.exec( consulta ) )
     {
-        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);
-
-        QMessageBox::information( this, "", sql.lastError().text(), "ok");
+        Funcoes::ErroSQL( sql, "CarregaAlmoco", this);        
 
         this->setEnabled( true );
 
@@ -312,7 +310,7 @@ void Almoco::on_pushButton_remover_clicked()
     if( ui->listWidget_lista->currentItem() == 0 )
         return ;
 
-    int iBotao = QMessageBox::question( this, "", "Remover almoço selecionado?","Sim", "Não" );
+    int iBotao = Funcoes::MensagemAndroid( "Almoço", "Remover almoço selecionado?", "Sim", "Não", this );//QMessageBox::question( this, "", "Remover almoço selecionado?","Sim", "Não" );
 
     if( iBotao == 1 )
         return ;
@@ -384,4 +382,9 @@ void Almoco::on_pushButton_cancelar_clicked()
     ui->dateEdit_data->setDate( QDate::currentDate() );
 
     HabilitaBotoes( true );
+}
+
+void Almoco::on_pushButton_voltar_clicked()
+{
+    this->close();
 }

@@ -143,6 +143,8 @@ QString ConexaoBanco::ValorCampo(QSqlDatabase dbBanco, QString tabela, QString c
         retorno = QString("");
     }
 
+    //Funcoes::MensagemAndroid( "", sql.lastQuery() );
+
     QString r = retorno;
     return r;
 }

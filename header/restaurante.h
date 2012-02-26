@@ -27,6 +27,8 @@ private slots:
 
     void on_pushButton_cancelar_clicked();
 
+    void on_pushButton_Voltar_clicked();
+
 private:
     void keyPressEvent(QKeyEvent *event);
 

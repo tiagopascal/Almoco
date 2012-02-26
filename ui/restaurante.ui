@@ -167,6 +167,18 @@ background-color: rgb(170, 170, 127);</string>
           </property>
          </spacer>
         </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButton_Voltar">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Voltar</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="3" column="0">

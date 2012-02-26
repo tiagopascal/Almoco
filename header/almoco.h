@@ -40,8 +40,10 @@ private slots:
 
     void on_pushButton_cancelar_clicked();
 
+    void on_pushButton_voltar_clicked();
+
 protected:
-    void keyPressEvent(QKeyEvent *event);
+//    void keyPressEvent(QKeyEvent *event);
 
 
 private:
