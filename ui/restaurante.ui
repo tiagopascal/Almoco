@@ -154,20 +154,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3" colspan="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="2">
+        <item row="2" column="0">
          <widget class="QPushButton" name="pushButton_Voltar">
           <property name="font">
            <font>
@@ -190,6 +177,21 @@ color: rgb(0, 85, 0);</string>
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <pointsize>7</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 85, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -200,7 +202,6 @@ color: rgb(0, 85, 0);</string>
   <tabstop>lineEdit_valor</tabstop>
   <tabstop>pushButton_adicionar</tabstop>
   <tabstop>pushButton_remover</tabstop>
-  <tabstop>pushButton_Voltar</tabstop>
   <tabstop>pushButton_editar</tabstop>
   <tabstop>pushButton_cancelar</tabstop>
   <tabstop>listWidget_lista</tabstop>

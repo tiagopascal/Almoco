@@ -8,6 +8,8 @@ Almoco::Almoco(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Funcoes::centralizarWidget( this );
+
     operacao = CARREGANDO;
 
     db = ConexaoBanco::Banco();
@@ -127,6 +129,8 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
     {
         ui->listWidget_lista->clear();
     }
+
+    consulta += " order by data desc";
 
     if( !sql.exec( consulta ) )
     {

@@ -35,6 +35,8 @@ void Backup::on_pushButton_voltar_clicked()
 
 void Backup::on_pushButton_backup_clicked()
 {
+    this->setEnabled( false );
+
     QDateTime dataHora( QDateTime::currentDateTime() );
     QString sNomeBackup;
     QString sDataHora = dataHora.currentDateTime().toString( sFormatoDataHoraArquivo );
@@ -56,10 +58,14 @@ void Backup::on_pushButton_backup_clicked()
         ui->listWidget_lista->item( ui->listWidget_lista->count() -1 )->setSelected( true );
         ui->listWidget_lista->setFocus();
     }
+
+    this->setEnabled( true );
 }
 
 void Backup::CarregaBackup()
 {
+    this->setEnabled( false );
+
     QDir diretorioBackup( sCaminhoBackup );
 
     QFileInfoList arquivosBackup = diretorioBackup.entryInfoList( QDir::Files );
@@ -77,6 +83,8 @@ void Backup::CarregaBackup()
         ui->listWidget_lista->addItem( dataHora.fromString( sDataHoraBackup, sFormatoDataHoraArquivo ).toString( "dd/MM/yyyy hh:mm:ss" ) );
         ui->listWidget_lista->item( i )->setWhatsThis( arquivosBackup.at( i ).filePath() );
     }
+
+    this->setEnabled( true );
 }
 
 void Backup::on_pushButton_remover_clicked()
@@ -89,6 +97,8 @@ void Backup::on_pushButton_remover_clicked()
     if( iBotao == 1 )
         return ;
 
+    this->setEnabled( false );
+
     QFile arquivo( ui->listWidget_lista->currentItem()->whatsThis() );
 
     if( !arquivo.remove() )
@@ -99,6 +109,8 @@ void Backup::on_pushButton_remover_clicked()
     {
         ui->listWidget_lista->takeItem( ui->listWidget_lista->currentRow() );
     }
+
+    this->setEnabled( true );
 }
 
 void Backup::on_pushButton_restaurar_clicked()

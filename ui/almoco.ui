@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>400</height>
+    <width>365</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="font">
@@ -26,7 +26,7 @@ color: rgb(0, 85, 0);</string>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout_7">
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="frameShape">
@@ -35,7 +35,7 @@ color: rgb(0, 85, 0);</string>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_7">
+     <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="1">
@@ -177,15 +177,6 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
-         <widget class="QDateEdit" name="dateEdit_filtroAte">
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="2">
          <widget class="QLabel" name="label_6">
           <property name="font">
@@ -195,6 +186,15 @@ color: rgb(0, 85, 0);</string>
           </property>
           <property name="text">
            <string>Até</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDateEdit" name="dateEdit_filtroAte">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
           </property>
          </widget>
         </item>
@@ -231,19 +231,6 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>137</width>
-            <height>25</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="pushButton_editar">
           <property name="font">
@@ -268,18 +255,6 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
-         <widget class="QPushButton" name="pushButton_voltar">
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Voltar</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="pushButton_cancelar">
           <property name="font">
@@ -292,11 +267,23 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButton_voltar">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Voltar</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="3" column="0">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0" colspan="7">
+        <item row="0" column="0" colspan="5">
          <widget class="QListWidget" name="listWidget_lista">
           <property name="font">
            <font>
@@ -305,7 +292,11 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="font">
            <font>
@@ -320,7 +311,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="0" column="1">
          <widget class="QLabel" name="label_almoco">
           <property name="font">
            <font>
@@ -335,7 +326,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="0" column="2">
          <widget class="QLabel" name="label_4">
           <property name="font">
            <font>
@@ -350,7 +341,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
+        <item row="0" column="3">
          <widget class="QLabel" name="label_empresa">
           <property name="font">
            <font>
@@ -365,20 +356,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="4" colspan="3">
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="label_7">
           <property name="font">
            <font>
@@ -393,7 +371,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="QLabel" name="label_voce">
           <property name="font">
            <font>
@@ -410,6 +388,21 @@ color: rgb(0, 85, 0);</string>
         </item>
        </layout>
       </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <pointsize>7</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 85, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -424,7 +417,6 @@ color: rgb(0, 85, 0);</string>
   <tabstop>dateEdit_filtroAte</tabstop>
   <tabstop>pushButton_adicionar</tabstop>
   <tabstop>pushButton_editar</tabstop>
-  <tabstop>pushButton_voltar</tabstop>
   <tabstop>pushButton_remover</tabstop>
   <tabstop>pushButton_cancelar</tabstop>
   <tabstop>listWidget_lista</tabstop>
