@@ -36,6 +36,7 @@ Almoco::Almoco(QWidget *parent) :
 
     ui->comboBox_restaurantesLancamento->addItem( "Todos" );
     ui->comboBox_restaurantesLancamento->setItemData( iPosicao, QVariant( 0 ) );
+    ui->comboBox_restaurantesLancamento->setCurrentIndex( iPosicao );
 
     QDate dataAtual ( QDate::currentDate() );
 
@@ -90,6 +91,7 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
     double dValorEmpresa = 0;
     bool bTodos = false;
     QString sCodigoEmpresa = ui->comboBox_restaurantesLancamento->itemData( ui->comboBox_restaurantesLancamento->currentIndex() ).toString() ;
+
     this->setEnabled( false );
 
     if( ui->comboBox_restaurantesLancamento->currentText() == "Todos" )
@@ -103,15 +105,14 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 
     if( bTodos )
     {
-        sWhere = "";
-        //sWhere = " where almoco.data between '" + ui->dateEdit_filtro->date().toString("dd-MM-yyyy") + "' and '" + ui->dateEdit_filtroAte->date().toString("dd-MM-yyyy") + "' " ;
+        sWhere = " where almoco.dtcadastro between '" + ui->dateEdit_filtro->date().toString("yyyy-MM-dd") + "' and '" + ui->dateEdit_filtroAte->date().toString("yyyy-MM-dd") + "' " ;
     }
     else
     {
         if( sCodigoEmpresa.isEmpty() )
             sCodigoEmpresa = "0";
 
-        sWhere = " where almoco.restaurante = " + sCodigoEmpresa ;//+ " and almoco.data between '" + ui->dateEdit_filtro->date().toString("dd-MM-yyyy") + "' and '" + ui->dateEdit_filtroAte->date().toString("dd-MM-yyyy") + "' ";
+        sWhere = " where almoco.restaurante = " + sCodigoEmpresa + " and almoco.dtcadastro between '" + ui->dateEdit_filtro->date().toString("yyyy-MM-dd") + "' and '" + ui->dateEdit_filtroAte->date().toString("yyyy-MM-dd") + "' ";
     }
 
     consulta += sWhere ;
@@ -130,7 +131,7 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
         ui->listWidget_lista->clear();
     }
 
-    consulta += " order by data desc";
+    consulta += " order by dtcadastro desc";
 
     if( !sql.exec( consulta ) )
     {
@@ -140,12 +141,14 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
 
         return ;
     }
+    //else
+   //    Funcoes::MensagemAndroid( "Carrega almoço", sql.lastQuery(), "Aperte", this );
 
     while( sql.next() )
     {
         QListWidgetItem *novoItem = new QListWidgetItem( );
 
-        novoItem->setText( "Data:  " + sql.record().value("data").toDate().toString("dd-MM-yyyy")
+        novoItem->setText( "Data:  " + sql.record().value("dtcadastro").toDate().toString("dd-MM-yyyy")
                            + "\nValor: " + NumeroParaMoeda( sql.record().value("valor").toString() )
                            + "\nRestaurante: " + sql.record().value("nomerestaurante").toString() );
         novoItem->setWhatsThis( sql.record().value("codigo").toString() );
@@ -156,62 +159,15 @@ void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
         dValorVoce += sql.record().value("valorvoce").toDouble();
     }
 
-//    consulta = "select sum(valor) as valor from almoco " + sWhere;
-
-//    if( !sql.exec( consulta ) )
-//    {
-//        Funcoes::ErroSQL( sql, "Almoco::CarregaAlmoco", this );
-
-//        this->setEnabled( true );
-
-//        return ;
-//    }
-
-//    sql.next();
-
-//    dValorAlmoco = sql.record().value("valor").toDouble();
-//    ui->label_almoco->setText( Funcoes::NumeroParaMoeda( sql.record().value("valor").toString() ) );
     ui->label_almoco->setText( Funcoes::NumeroParaMoeda( QString::number( dValorAlmoco ) ) );
-
-//    double dValorEmpresa = 0;
-
-//    if( bTodos )
-//    {
-//        dValorEmpresa = ConexaoBanco::ValorCampo( db, "restaurante",  " 1 = 1 " , "sum(valor) as valor", "valor" ).toDouble() * ui->listWidget_lista->count();
-//    }
-//    else
-//    {
-//        dValorEmpresa = ConexaoBanco::ValorCampo( db, "restaurante",  "codigo = " + sCodigoEmpresa , "valor" ).toDouble() * ui->listWidget_lista->count();
-//    }
-
-//    consulta = "select sum(valor - " + sValorEmpresa + ") as valor from almoco " + sWhere;
-
-//    if( !sql.exec( consulta ) )
-//    {
-//        Funcoes::ErroSQL( sql, "Almoco::CarregaAlmoco", this );
-
-//        this->setEnabled( true );
-
-//        return ;
-//    }
-
-//    sql.next();
-
-    //ui->label_voce->setText( Funcoes::NumeroParaMoeda( sql.record().value("valor").toString() ) );
 
     ui->label_empresa->setText( Funcoes::NumeroParaMoeda( QString::number( dValorEmpresa ) ) );
 
     ui->label_voce->setText( Funcoes::NumeroParaMoeda( QString::number( dValorVoce ) ) );
 
-    //double dValorVoce = ui->label_almoco->text().toDouble() - ui->label_empresa->text().toDouble() ;
-
-    //ui->label_voce->setText( Funcoes::NumeroParaMoeda( QString::number( dValorVoce ) ) );
-    //ui->label_empresa->setText( QString::number( sValorEmpresa.toDouble() * ui->listWidget_lista->count() ) );
-
     this->setEnabled( true );
+    //ui->listWidget_lista->scrollBarWidgets();
 }
-
-
 
 QString Almoco::MoedaParaNumero(QString sValor)
 {
@@ -263,7 +219,7 @@ void Almoco::on_pushButton_adicionar_clicked()
 
     if( operacao == EDITAR )
     {
-        consulta = "update almoco set valor = " + sValor + ", data = '"
+        consulta = "update almoco set valor = " + sValor + ", dtcadastro = '"
                 + ui->dateEdit_data->date().toString("yyyy-MM-dd") + "', "
                 + "restaurante = " +
                 ui->comboBox_restaurantesLancamento->itemData(
@@ -273,7 +229,7 @@ void Almoco::on_pushButton_adicionar_clicked()
     }
     else
     {
-        consulta = "insert into almoco( valor, data, restaurante) values(" + sValor + ", '"
+        consulta = "insert into almoco( valor, dtcadastro, restaurante) values(" + sValor + ", '"
                 + ui->dateEdit_data->date().toString("yyyy-MM-dd") + "', " +
                 ui->comboBox_restaurantesLancamento->itemData(
                 ui->comboBox_restaurantesLancamento->currentIndex() ).toString() + ")";
@@ -391,4 +347,14 @@ void Almoco::on_pushButton_cancelar_clicked()
 void Almoco::on_pushButton_voltar_clicked()
 {
     this->close();
+}
+
+void Almoco::on_dateEdit_filtro_editingFinished()
+{
+    CarregaAlmoco();
+}
+
+void Almoco::on_dateEdit_filtroAte_editingFinished()
+{
+    CarregaAlmoco();
 }

@@ -760,8 +760,6 @@ int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString bo
 {
     QMessageBox box;
 
-    box.setParent( parent );
-
     //Coloca o titulo em italico e negrito
     if( !texto.contains( "<b>" ) )
         texto = "<i><b>" + texto + "</b></i>";
@@ -771,16 +769,35 @@ int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString bo
     box.addButton( botao1, QMessageBox::AcceptRole );
 
     if( !botao2.isEmpty() )
+    {
         box.addButton( botao2, QMessageBox::AcceptRole );
+    }
 
     if( !botao3.isEmpty() )
+    {
         box.addButton( botao3, QMessageBox::AcceptRole );
+    }
 
-    box.setIconPixmap( QPixmap( ":imagens/Comida.png" ) );
+
+    //box.setDefaultButton(  );
+    //box.setIconPixmap( QPixmap( ":imagens/Comida.png" ) );
     //box.setDetailedText( "Teste de testo detalhado\nmais teste\noutro\nblablabla" );
     box.setWindowModality( Qt::WindowModal );
     box.setWindowFlags( Qt::ToolTip );
-    box.setStyleSheet("QDialog{ border: 1px solid black; border-style: solid; border-radius: 4px; }");
+
+    QString sStyleSheet;
+
+    sStyleSheet = "QDialog{ background-color: rgb(170, 170, 127);color: rgb(0, 85, 0); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt; }";
+    box.setStyleSheet( sStyleSheet );
+//    if( !parent == 0 )
+//    {
+//        //Quando a tela já tem o style sheet fica meio estranho
+//        if( !parent->styleSheet().contains( sStyleSheet ) )
+//            box.setStyleSheet( sStyleSheet );
+
+//        //box.setParent( parent );
+//    }
+
     return box.exec();
 }
 
