@@ -41,6 +41,10 @@ private slots:
 
     void on_pushButton_voltar_clicked();
 
+    void on_dateEdit_filtro_editingFinished();
+
+    void on_dateEdit_filtroAte_editingFinished();
+
 protected:
 //    void keyPressEvent(QKeyEvent *event);
 

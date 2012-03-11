@@ -801,7 +801,7 @@ bool ConexaoBanco::CriarTabelas(QSqlDatabase dbBanco, bool transacao)
                "dataversao date not null default '0000-00-00', dataatualizacao date not null default '0000-00-00')";
     ok = sql.exec( consulta );
 
-    consulta = "create table if not exists almoco( codigo integer primary key " + sAutoIncrement + ", valor double not null default 0.00, data date not null default '00-00-0000', restaurante integer not null default 0) ";
+    consulta = "create table if not exists almoco( codigo integer primary key " + sAutoIncrement + ", valor double not null default 0.00, restaurante integer not null default 0, dtcadastro date not null default '0000-00-00') ";
     ok = sql.exec( consulta );
 
     if( !ok )
@@ -816,7 +816,7 @@ bool ConexaoBanco::CriarTabelas(QSqlDatabase dbBanco, bool transacao)
     if( !ok )
         Funcoes::ErroSQL( sql, "ConexaoBanco::CriarTabelas()" );
 
-    AtualizaTabelaVersao( "0.0.3", QDate( 2012, 3, 18 ) );
+    AtualizaTabelaVersao( "1.0.7", QDate( 2012, 3, 10 ) );
 
     if( transacao )
         ok = dbBanco.commit();
@@ -865,13 +865,24 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
     if( sql.next() )
         versao = sql.record().value("versao").toString();
     else
-        versao = "0.0.1";
+        versao = "1.0.7";
 
-    if( versao == "0.0.4" )
+    //if( versao.replace( ".", "" ).toInt() < 1  )
+    {
+        sql.exec( "alter table almoco add dtcadastro date not null default '0000-00-00'" );
+
+        //consulta = "update almoco set dtcadastro = substr(data, 7, 4 ) || '-' || substr(data, 4, 2 ) || '-' || substr(data, 1, 2)";
+        consulta = "update almoco set dtcadastro = data";
+        sql.exec( consulta );
+
+        //AtualizaTabelaVersao( "1.0.7", QDate( 2012, 2, 22 ) );
+    }
+
+    if( versao == "1.0.7" )
     {
 
-        //AtualizaTabelaVersao( "0.0.4", QDate( 2012, 2, 22 ) );
     }
+
 
      return atualizaou;
 }

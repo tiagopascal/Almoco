@@ -15,7 +15,11 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(170, 170, 127);
-color: rgb(0, 85, 0);</string>
+color: rgb(0, 85, 0);
+
+border: 1px solid black; 
+border-style: solid;
+border-radius: 4px; font-size: 7pt;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -60,7 +64,7 @@ color: rgb(0, 85, 0);</string>
         <item row="4" column="0">
          <widget class="QFrame" name="frame_2">
           <property name="styleSheet">
-           <string notr="true">image: url(:/imagens/imagens/Comida.png);</string>
+           <string notr="true">background-image: url(:/imagens/imagens/Comida.png);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>

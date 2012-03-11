@@ -21,7 +21,11 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(170, 170, 127);
-color: rgb(0, 85, 0);</string>
+color: rgb(0, 85, 0);
+
+border: 1px solid black; 
+border-style: solid;
+border-radius: 4px; font-size: 7pt;</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
@@ -146,7 +150,7 @@ color: rgb(0, 85, 0);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="5">
+        <item row="1" column="0" colspan="4">
          <widget class="QComboBox" name="comboBox_restaurantesLancamento">
           <property name="font">
            <font>
@@ -196,10 +200,29 @@ color: rgb(0, 85, 0);</string>
             <pointsize>7</pointsize>
            </font>
           </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="2" column="4">
          <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="4">
+         <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -289,6 +312,11 @@ color: rgb(0, 85, 0);</string>
            <font>
             <pointsize>7</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QScrollBar:vertical {
+      width: 40px;
+  }</string>
           </property>
          </widget>
         </item>
