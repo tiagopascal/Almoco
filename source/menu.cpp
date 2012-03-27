@@ -34,25 +34,16 @@ void Menu::keyPressEvent(QKeyEvent *event)
 
 void Menu::on_pushButton_cadRestaurante_clicked()
 {
-    Restaurante restaurante( this );
-
-    //this->setEnabled( false );
+    Restaurante restaurante;
 
     restaurante.exec();
-
-    //this->setEnabled( true );
 }
 
 void Menu::on_pushButton_cadAlmoco_clicked()
 {
-    Almoco almoco( this );
+    Almoco almoco;
 
-    //setVisible( false );
-
-    //almoco.setWindowModality( Qt::ApplicationModal );
     almoco.exec();
-
-    //setVisible( true );
 }
 
 void Menu::on_pushButton_Sair_clicked()
@@ -67,7 +58,7 @@ void Menu::on_pushButton_Sair_clicked()
 
 void Menu::on_pushButton_backup_clicked()
 {
-    Backup backup( this );
+    Backup backup;
 
     backup.exec();
 }

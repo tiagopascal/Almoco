@@ -20,8 +20,8 @@
    <string>Almoco</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(170, 170, 127);
-color: rgb(0, 85, 0);
+   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
+color: rgb(170, 170, 127);
 
 border: 1px solid black; 
 border-style: solid;
@@ -150,20 +150,6 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="4">
-         <widget class="QComboBox" name="comboBox_restaurantesLancamento">
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>Restaurante não informado</string>
-           </property>
-          </item>
-         </widget>
-        </item>
         <item row="2" column="0" colspan="2">
          <widget class="QDateEdit" name="dateEdit_filtro">
           <property name="font">
@@ -221,18 +207,26 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </spacer>
         </item>
-        <item row="0" column="4">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="0" column="1" colspan="4">
+         <widget class="QComboBox" name="comboBox_restaurantesLancamento">
+          <property name="font">
+           <font>
+            <pointsize>7</pointsize>
+           </font>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
+          <item>
+           <property name="text">
+            <string>Restaurante não informado</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>FILTRO POR DATA:</string>
           </property>
-         </spacer>
+         </widget>
         </item>
        </layout>
       </item>
@@ -242,12 +236,11 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_adicionar">
           <property name="font">
            <font>
-            <family>Ubuntu</family>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>&amp;Adicionar</string>
@@ -258,8 +251,11 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_editar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Editar</string>
@@ -270,8 +266,11 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Remover</string>
@@ -282,8 +281,11 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_cancelar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Cancelar</string>
@@ -294,8 +296,11 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_voltar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Voltar</string>
@@ -440,7 +445,6 @@ border-radius: 4px; font-size: 7pt;</string>
  <tabstops>
   <tabstop>lineEdit_valor</tabstop>
   <tabstop>dateEdit_data</tabstop>
-  <tabstop>comboBox_restaurantesLancamento</tabstop>
   <tabstop>dateEdit_filtro</tabstop>
   <tabstop>dateEdit_filtroAte</tabstop>
   <tabstop>pushButton_adicionar</tabstop>

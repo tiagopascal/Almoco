@@ -14,12 +14,11 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(170, 170, 127);
-color: rgb(0, 85, 0);
-
+   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
+color: rgb(170, 170, 127);
 border: 1px solid black; 
 border-style: solid;
-border-radius: 4px; font-size: 7pt;</string>
+border-radius: 4px; font-size: 8pt;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -35,6 +34,9 @@ border-radius: 4px; font-size: 7pt;</string>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_cadAlmoco">
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
+          </property>
           <property name="text">
            <string>Almoço</string>
           </property>
@@ -42,6 +44,9 @@ border-radius: 4px; font-size: 7pt;</string>
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pushButton_cadRestaurante">
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
+          </property>
           <property name="text">
            <string>Cadastrar restaurante</string>
           </property>
@@ -49,6 +54,9 @@ border-radius: 4px; font-size: 7pt;</string>
         </item>
         <item row="3" column="0">
          <widget class="QPushButton" name="pushButton_Sair">
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
+          </property>
           <property name="text">
            <string>Sair</string>
           </property>
@@ -56,6 +64,9 @@ border-radius: 4px; font-size: 7pt;</string>
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="pushButton_backup">
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
+          </property>
           <property name="text">
            <string>Backup</string>
           </property>

@@ -867,7 +867,7 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
     else
         versao = "1.0.7";
 
-    //if( versao.replace( ".", "" ).toInt() < 1  )
+    if( versao.replace( ".", "" ).toInt() < 1  )
     {
         sql.exec( "alter table almoco add dtcadastro date not null default '0000-00-00'" );
 
@@ -875,7 +875,7 @@ bool ConexaoBanco::AtualizaEstruturaDoBanco()
         consulta = "update almoco set dtcadastro = data";
         sql.exec( consulta );
 
-        //AtualizaTabelaVersao( "1.0.7", QDate( 2012, 2, 22 ) );
+        AtualizaTabelaVersao( "1.0.7", QDate( 2012, 2, 22 ) );
     }
 
     if( versao == "1.0.7" )
