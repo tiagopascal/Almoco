@@ -14,8 +14,12 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(170, 170, 127);
-color: rgb(0, 85, 0);</string>
+   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
+color: rgb(170, 170, 127);
+
+border: 1px solid black; 
+border-style: solid;
+border-radius: 4px; font-size: 7pt;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -110,8 +114,11 @@ color: rgb(0, 85, 0);</string>
          <widget class="QPushButton" name="pushButton_adicionar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Adicionar</string>
@@ -122,8 +129,11 @@ color: rgb(0, 85, 0);</string>
          <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Remover</string>
@@ -134,8 +144,11 @@ color: rgb(0, 85, 0);</string>
          <widget class="QPushButton" name="pushButton_editar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Editar</string>
@@ -146,8 +159,11 @@ color: rgb(0, 85, 0);</string>
          <widget class="QPushButton" name="pushButton_cancelar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Cancelar</string>
@@ -158,8 +174,11 @@ color: rgb(0, 85, 0);</string>
          <widget class="QPushButton" name="pushButton_Voltar">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>9</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 9pt;</string>
           </property>
           <property name="text">
            <string>Voltar</string>

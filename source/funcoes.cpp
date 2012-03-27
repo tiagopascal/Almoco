@@ -787,16 +787,10 @@ int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString bo
 
     QString sStyleSheet;
 
-    sStyleSheet = "QDialog{ background-color: rgb(170, 170, 127);color: rgb(0, 85, 0); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt; }";
-    box.setStyleSheet( sStyleSheet );
-//    if( !parent == 0 )
-//    {
-//        //Quando a tela já tem o style sheet fica meio estranho
-//        if( !parent->styleSheet().contains( sStyleSheet ) )
-//            box.setStyleSheet( sStyleSheet );
+    sStyleSheet = "QDialog{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt;}; "
+            "QPushButton{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px;font-size: 10pt;};";
 
-//        //box.setParent( parent );
-//    }
+    box.setStyleSheet( sStyleSheet );
 
     return box.exec();
 }
