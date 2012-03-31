@@ -6,20 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>376</height>
+    <width>348</width>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
-color: rgb(170, 170, 127);
+   <string notr="true">font-size: 6pt;
+background-color: rgb(170, 170, 127);
 
 border: 1px solid black; 
 border-style: solid;
-border-radius: 4px; font-size: 7pt;</string>
+border-radius: 4px; 
+border-width: 1px;
+border-color: #339;
+
+padding: 3px;
+padding-left: 5px;
+padding-right: 5px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -37,7 +43,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QListWidget" name="listWidget_lista">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -45,17 +51,21 @@ border-radius: 4px; font-size: 7pt;</string>
       width: 40px;
   }</string>
           </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_backup">
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>13</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 10pt;</string>
+           <string notr="true">font-size: 13pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Fazer backup</string>
@@ -66,11 +76,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>13</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 10pt;</string>
+           <string notr="true">font-size: 13pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Remover backup</string>
@@ -81,11 +92,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_restaurar">
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>13</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 10pt;</string>
+           <string notr="true">font-size: 13pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Restaurar backup</string>
@@ -96,11 +108,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_voltar">
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>13</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 10pt;</string>
+           <string notr="true">font-size: 13pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Voltar</string>
@@ -113,7 +126,7 @@ border-radius: 4px; font-size: 7pt;</string>
        <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>6</pointsize>
          </font>
         </property>
         <property name="styleSheet">

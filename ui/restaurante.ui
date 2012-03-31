@@ -14,19 +14,25 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
-color: rgb(170, 170, 127);
+   <string notr="true">font-size: 6pt;
+background-color: rgb(170, 170, 127);
 
 border: 1px solid black; 
 border-style: solid;
-border-radius: 4px; font-size: 7pt;</string>
+border-radius: 4px; 
+border-width: 1px;
+border-color: #339;
+
+padding: 3px;
+padding-left: 5px;
+padding-right: 5px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="font">
       <font>
-       <pointsize>7</pointsize>
+       <pointsize>6</pointsize>
       </font>
      </property>
      <property name="frameShape">
@@ -42,7 +48,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="text">
@@ -54,7 +60,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLineEdit" name="lineEdit_restaurante">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="inputMethodHints">
@@ -70,7 +76,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_2">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="text">
@@ -82,7 +88,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLineEdit" name="lineEdit_valor">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="inputMethodHints">
@@ -114,11 +120,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_adicionar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Adicionar</string>
@@ -129,11 +136,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Remover</string>
@@ -144,11 +152,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_editar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Editar</string>
@@ -159,11 +168,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_cancelar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Cancelar</string>
@@ -174,14 +184,26 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_Voltar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Voltar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_salvar">
+          <property name="styleSheet">
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Salvar</string>
           </property>
          </widget>
         </item>
@@ -191,8 +213,16 @@ border-radius: 4px; font-size: 7pt;</string>
        <widget class="QListWidget" name="listWidget_lista">
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>6</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QScrollBar:vertical {
+      width: 40px;
+  }</string>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -200,7 +230,7 @@ border-radius: 4px; font-size: 7pt;</string>
        <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>6</pointsize>
          </font>
         </property>
         <property name="styleSheet">

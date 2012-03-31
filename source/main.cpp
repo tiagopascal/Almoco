@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    //versão 1.1.0
     //QTextCodec::setCodecForCStrings( QTextCodec::codecForName("ISO 8859-1") );
     QTextCodec::setCodecForCStrings( QTextCodec::codecForName("UTF-8") );
 
