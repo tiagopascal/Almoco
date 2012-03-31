@@ -37,6 +37,12 @@ void Restaurante::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void Restaurante::LimparCampos()
+{
+    ui->lineEdit_restaurante->setText( QString("") );
+    ui->lineEdit_valor->setText( QString("") );
+}
+
 void Restaurante::CarregaRestaurante(bool bCarregarUltimoRestaurante)
 {
     QString sRestaurante = ui->lineEdit_restaurante->text();
@@ -121,7 +127,7 @@ void Restaurante::on_pushButton_adicionar_clicked()
 
     if( sValor.isEmpty() )
     {
-        ui->lineEdit_restaurante->setFocus();
+        ui->lineEdit_valor->setFocus();
 
         return ;
     }
@@ -156,7 +162,11 @@ void Restaurante::on_pushButton_adicionar_clicked()
     }
 
     CarregaRestaurante( false );
+
+    LimparCampos();
+
     operacao = NENHUMA;    
+
     this->setEnabled( true );
 }
 
@@ -218,6 +228,7 @@ void Restaurante::HabilitarCampos(bool bHabilitar)
     ui->pushButton_remover->setVisible( bHabilitar );
     ui->pushButton_editar->setVisible( bHabilitar );
     ui->pushButton_cancelar->setVisible( !bHabilitar );
+    ui->pushButton_salvar->setVisible( !bHabilitar );
     ui->listWidget_lista->setEnabled( bHabilitar );
 }
 
@@ -227,10 +238,17 @@ void Restaurante::on_pushButton_cancelar_clicked()
     ui->lineEdit_valor->setText( "" );
 
     HabilitarCampos( true );
+    LimparCampos();
+
     operacao = NENHUMA;
 }
 
 void Restaurante::on_pushButton_Voltar_clicked()
 {
     this->close();
+}
+
+void Restaurante::on_pushButton_salvar_clicked()
+{
+    on_pushButton_adicionar_clicked();
 }

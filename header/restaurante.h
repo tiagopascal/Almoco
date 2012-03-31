@@ -29,6 +29,8 @@ private slots:
 
     void on_pushButton_Voltar_clicked();
 
+    void on_pushButton_salvar_clicked();
+
 private:
     void keyPressEvent(QKeyEvent *event);
 
@@ -41,6 +43,7 @@ private:
 
     void CarregaRestaurante(bool bCarregarUltimoRestaurante );
     void HabilitarCampos( bool bHabilitar );
+    void LimparCampos();
 };
 
 #endif // RESTAURANTE_H

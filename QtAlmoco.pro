@@ -75,10 +75,12 @@ OTHER_FILES += \
     android/res/layout/splash.xml \
     android/res/values-es/strings.xml \
     android/res/drawable-hdpi/icon.png \
-    android/res/values-et/strings.xml
+    android/res/values-et/strings.xml \
+    android/version.xml
 
 RESOURCES += \
     imagens.qrc
+
 
 
 

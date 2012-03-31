@@ -8,6 +8,8 @@ Almoco::Almoco(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //ui->gridLayout_principal->setSizeConstraint(QLayout::SetFixedSize);
+
     //Funcoes::centralizarWidget( this );
 
     operacao = CARREGANDO;
@@ -70,12 +72,19 @@ Almoco::~Almoco()
 //    }
 //}
 
+void Almoco::LimparCampos()
+{
+    ui->lineEdit_valor->setText( QString("") );
+}
+
 void Almoco::HabilitaBotoes(bool bHabilitar)
 {
+    ui->pushButton_adicionar->setVisible( bHabilitar );
     ui->pushButton_remover->setVisible( bHabilitar );
     ui->pushButton_editar->setVisible( bHabilitar );
     ui->listWidget_lista->setEnabled( bHabilitar );
     ui->pushButton_cancelar->setVisible( !bHabilitar );
+    ui->pushButton_salvar->setVisible( !bHabilitar );
 }
 
 void Almoco::CarregaAlmoco( bool bCarregarUltimoAlmoco )
@@ -247,6 +256,7 @@ void Almoco::on_pushButton_adicionar_clicked()
     operacao = NENHUMA;
 
     CarregaAlmoco();
+    LimparCampos();
 
     this->setEnabled( true );
 }
@@ -341,6 +351,7 @@ void Almoco::on_pushButton_cancelar_clicked()
     ui->lineEdit_valor->setText( "" );
     ui->dateEdit_data->setDate( QDate::currentDate() );
 
+    LimparCampos();
     HabilitaBotoes( true );
 }
 
@@ -357,4 +368,9 @@ void Almoco::on_dateEdit_filtro_editingFinished()
 void Almoco::on_dateEdit_filtroAte_editingFinished()
 {
     CarregaAlmoco();
+}
+
+void Almoco::on_pushButton_salvar_clicked()
+{
+    on_pushButton_adicionar_clicked();
 }

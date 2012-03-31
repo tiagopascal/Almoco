@@ -45,6 +45,8 @@ private slots:
 
     void on_dateEdit_filtroAte_editingFinished();
 
+    void on_pushButton_salvar_clicked();
+
 protected:
 //    void keyPressEvent(QKeyEvent *event);
 
@@ -59,6 +61,7 @@ private:
     QString FormataCodigo(const QString codigo,const int qtdZeros = 6);
     QString NumeroParaMoeda(QString sValor);
     QString MoedaParaNumero(QString Valor);
+    void LimparCampos();
 
     void CarregaAlmoco( bool bCarregarUltimoAlmoco = false );
     void HabilitaBotoes( bool bHabilitar );

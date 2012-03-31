@@ -6,31 +6,45 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>365</width>
-    <height>467</height>
+    <width>352</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="font">
    <font>
-    <family>Ubuntu</family>
-    <pointsize>7</pointsize>
+    <pointsize>6</pointsize>
    </font>
   </property>
   <property name="windowTitle">
    <string>Almoco</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
-color: rgb(170, 170, 127);
+   <string notr="true">font-size: 6pt;
+background-color: rgb(170, 170, 127);
 
 border: 1px solid black; 
 border-style: solid;
-border-radius: 4px; font-size: 7pt;</string>
+border-radius: 4px; 
+border-width: 1px;
+border-color: #339;
+
+padding: 3px;
+padding-left: 5px;
+padding-right: 5px;</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhDialableCharactersOnly</set>
   </property>
-  <layout class="QGridLayout" name="gridLayout_7">
+  <layout class="QGridLayout" name="gridLayout_principal">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="frameShape">
@@ -40,14 +54,16 @@ border-radius: 4px; font-size: 7pt;</string>
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="1">
          <widget class="QLineEdit" name="lineEdit_valor">
           <property name="font">
            <font>
-            <family>ori1Uni</family>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="layoutDirection">
@@ -68,8 +84,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label">
           <property name="font">
            <font>
-            <family>ori1Uni</family>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -83,12 +98,11 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="2">
          <widget class="QLabel" name="label_2">
           <property name="font">
            <font>
-            <family>ori1Uni</family>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -102,12 +116,11 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
+        <item row="0" column="3">
          <widget class="QDateEdit" name="dateEdit_data">
           <property name="font">
            <font>
-            <family>ori1Uni</family>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -121,28 +134,18 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <item row="0" column="0" colspan="5">
          <widget class="QLabel" name="label_5">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="text">
@@ -150,13 +153,11 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
+        <item row="3" column="0" colspan="2">
          <widget class="QDateEdit" name="dateEdit_filtro">
           <property name="font">
            <font>
-            <family>Ubuntu</family>
-            <pointsize>7</pointsize>
-            <kerning>true</kerning>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="displayFormat">
@@ -167,11 +168,11 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="3" column="2">
          <widget class="QLabel" name="label_6">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="text">
@@ -179,11 +180,11 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
+        <item row="3" column="3" colspan="2">
          <widget class="QDateEdit" name="dateEdit_filtroAte">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="displayFormat">
@@ -194,24 +195,18 @@ border-radius: 4px; font-size: 7pt;</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="4">
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="2" column="0" colspan="5">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>FILTRO POR DATA:</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
-        <item row="0" column="1" colspan="4">
+        <item row="1" column="0" colspan="5">
          <widget class="QComboBox" name="comboBox_restaurantesLancamento">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <item>
@@ -221,26 +216,23 @@ border-radius: 4px; font-size: 7pt;</string>
           </item>
          </widget>
         </item>
-        <item row="1" column="0" colspan="4">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>FILTRO POR DATA:</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <layout class="QGridLayout" name="gridLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
         <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_adicionar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>&amp;Adicionar</string>
@@ -251,11 +243,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_editar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Editar</string>
@@ -266,11 +259,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_remover">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Remover</string>
@@ -281,11 +275,12 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_cancelar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Cancelar</string>
@@ -296,26 +291,41 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QPushButton" name="pushButton_voltar">
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Voltar</string>
           </property>
          </widget>
         </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_salvar">
+          <property name="styleSheet">
+           <string notr="true">font-size: 8pt;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Salvar</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <layout class="QGridLayout" name="gridLayout_5">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
         <item row="0" column="0" colspan="5">
          <widget class="QListWidget" name="listWidget_lista">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -323,17 +333,20 @@ border-radius: 4px; font-size: 7pt;</string>
       width: 40px;
   }</string>
           </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -348,7 +361,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_almoco">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -363,7 +376,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_4">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -378,7 +391,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_empresa">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -393,7 +406,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_7">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -408,7 +421,7 @@ border-radius: 4px; font-size: 7pt;</string>
          <widget class="QLabel" name="label_voce">
           <property name="font">
            <font>
-            <pointsize>7</pointsize>
+            <pointsize>6</pointsize>
            </font>
           </property>
           <property name="frameShape">
@@ -421,11 +434,11 @@ border-radius: 4px; font-size: 7pt;</string>
         </item>
        </layout>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>6</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -444,7 +457,6 @@ border-radius: 4px; font-size: 7pt;</string>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>lineEdit_valor</tabstop>
-  <tabstop>dateEdit_data</tabstop>
   <tabstop>dateEdit_filtro</tabstop>
   <tabstop>dateEdit_filtroAte</tabstop>
   <tabstop>pushButton_adicionar</tabstop>

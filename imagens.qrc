@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/imagens">
         <file>imagens/Comida.png</file>
-        <file>imagens/madeira1.png</file>
     </qresource>
 </RCC>

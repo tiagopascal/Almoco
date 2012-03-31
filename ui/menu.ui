@@ -6,19 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>245</width>
-    <height>323</height>
+    <width>321</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/imagens/imagens/madeira1.png);
-color: rgb(170, 170, 127);
+   <string notr="true">font-size: 6pt;
+background-color: rgb(170, 170, 127);
+
 border: 1px solid black; 
 border-style: solid;
-border-radius: 4px; font-size: 8pt;</string>
+border-radius: 4px; 
+border-width: 1px;
+border-color: #339;
+
+padding: 3px;
+padding-left: 5px;
+padding-right: 5px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -30,22 +37,40 @@ border-radius: 4px; font-size: 8pt;</string>
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
         <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_cadAlmoco">
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 11pt;
+color: rgb(255, 255, 255);
+
+padding: 8px;</string>
           </property>
           <property name="text">
            <string>Almoço</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pushButton_cadRestaurante">
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 11pt;
+color: rgb(255, 255, 255);
+
+padding: 8px;</string>
           </property>
           <property name="text">
            <string>Cadastrar restaurante</string>
@@ -55,7 +80,10 @@ border-radius: 4px; font-size: 8pt;</string>
         <item row="3" column="0">
          <widget class="QPushButton" name="pushButton_Sair">
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 11pt;
+color: rgb(255, 255, 255);
+
+padding: 8px;</string>
           </property>
           <property name="text">
            <string>Sair</string>
@@ -65,7 +93,10 @@ border-radius: 4px; font-size: 8pt;</string>
         <item row="2" column="0">
          <widget class="QPushButton" name="pushButton_backup">
           <property name="styleSheet">
-           <string notr="true">font-size: 9pt;</string>
+           <string notr="true">font-size: 11pt;
+color: rgb(255, 255, 255);
+
+padding: 8px;</string>
           </property>
           <property name="text">
            <string>Backup</string>
@@ -75,7 +106,7 @@ border-radius: 4px; font-size: 8pt;</string>
         <item row="4" column="0">
          <widget class="QFrame" name="frame_2">
           <property name="styleSheet">
-           <string notr="true">background-image: url(:/imagens/imagens/Comida.png);</string>
+           <string notr="true">image: url(:/imagens/imagens/Comida.png);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>

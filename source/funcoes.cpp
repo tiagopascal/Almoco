@@ -787,10 +787,19 @@ int Funcoes::MensagemAndroid(QString texto, QString informativeTexto, QString bo
 
     QString sStyleSheet;
 
-    sStyleSheet = "QDialog{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt;}; "
-            "QPushButton{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px;font-size: 10pt;};";
+    //sStyleSheet = "QDialog{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt;}; "
+    if( parent )
+    {
+        sStyleSheet = "QDialog{" + parent->styleSheet() + "}"
+                "QDialog{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px; font-size: 7pt;}; ";
+    }
+
+    //        "QPushButton{background-image: url(:/imagens/imagens/madeira1.png);color: rgb(170, 170, 127); border: 1px solid black; border-style: solid; border-radius: 4px;font-size: 10pt;};";
 
     box.setStyleSheet( sStyleSheet );
+
+
+    //box.setParent( parent );
 
     return box.exec();
 }
