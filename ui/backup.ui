@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
+    <width>332</width>
     <height>474</height>
    </rect>
   </property>
@@ -28,6 +28,9 @@ padding-left: 5px;
 padding-right: 5px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMaximumSize</enum>
+   </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="frameShape">

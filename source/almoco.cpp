@@ -1,5 +1,6 @@
 #include "header/almoco.h"
 #include "ui_almoco.h"
+#include <QtDebug>
 
 #include <QMessageBox>
 
@@ -334,7 +335,15 @@ void Almoco::on_pushButton_editar_clicked()
     int iDoisPontos = sTexto.indexOf( ":" );
     int iEnter = sTexto.indexOf( "\n" );
 
-    ui->dateEdit_data->setDate( QDate::fromString( sTexto.left( iEnter -1 ) ) );
+    QString sData("Teste");
+
+    sData = sTexto.mid( iDoisPontos + 2, iEnter - (iDoisPontos + 2) ).trimmed();
+    qDebug() << "iDoisPontos: " << iDoisPontos ;
+    qDebug() << "iEnter: " << iEnter ;
+    qDebug() << "sData: " << sData ;
+    qDebug() << "sTexto: " << sTexto ;
+
+    ui->dateEdit_data->setDate( QDate::fromString( sData, "dd-MM-yyyy" ) );
 
     iDoisPontos = sTexto.indexOf( ":", iEnter );
     iEnter = sTexto.indexOf( "\n", iDoisPontos );
